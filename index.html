@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FIND THE AI — Next-Gen AI Content Forensics & Detection Chamber</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Ambient Glow Backgrounds -->
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+  <div class="ambient-glow glow-3"></div>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="nav-container">
+      <div class="brand">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"/>
+            <path d="M12 6v6l4 2"/>
+            <circle cx="12" cy="12" r="3" fill="currentColor" fill-opacity="0.3"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-title">FIND THE <span class="gradient-text">AI</span></span>
+          <span class="brand-badge">RESEARCH OBSERVATORY</span>
+        </div>
+      </div>
+
+      <nav class="nav-links">
+        <a href="#council" class="nav-link">🏛️ AI Council</a>
+        <a href="#simulator" class="nav-link active">🔬 Detection Simulator</a>
+        <a href="#masterclass" class="nav-link">📖 How It Works</a>
+        <a href="#evasion" class="nav-link">⚔️ Evasion Lab</a>
+        <a href="#architecture" class="nav-link">🗺️ System Blueprint</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="https://github.com/YashDhirajOza/FIND-THE-AI-" target="_blank" class="github-btn" rel="noreferrer">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+          <span>Star on GitHub</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <div class="hero-pill">
+        <span class="pulse-dot"></span>
+        <span>Forensic AI Detection & Research Prototype • v1.0.0</span>
+      </div>
+      <h1 class="hero-headline">
+        How Can You Tell If Data Is <br/>
+        <span class="gradient-text">Human or Artificial Intelligence?</span>
+      </h1>
+      <p class="hero-description">
+        Large Language Models optimize for maximum probability, leaving behind distinct mathematical fingerprints. 
+        Explore interactive forensic simulators, probability curvature, token rank distributions, and the deliberations of our 
+        <strong>AI Architecture Council</strong>.
+      </p>
+
+      <div class="hero-stats-grid">
+        <div class="stat-card">
+          <span class="stat-number">4</span>
+          <span class="stat-label">Detection Engines</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number">340x</span>
+          <span class="stat-label">Fast-Curvature Speed</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number">0.01%</span>
+          <span class="stat-label">Target False Positive Rate</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number">5</span>
+          <span class="stat-label">Council Specialists</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 1: THE AI COUNCIL CHAMBER -->
+  <section id="council" class="section-container">
+    <div class="section-header">
+      <div class="section-tag">ARCHITECTURAL CONSENSUS</div>
+      <h2 class="section-title">🏛️ The AI Council Chamber</h2>
+      <p class="section-subtitle">
+        5 specialized AI expert personas were convened to debate the foundational architecture, adversarial defenses, and ethical boundaries for detecting synthetic content.
+      </p>
+    </div>
+
+    <div class="council-wrapper">
+      <!-- Member Selector Tabs -->
+      <div class="council-tabs" id="councilTabs">
+        <button class="council-tab active" data-member="0">
+          <span class="avatar">🔬</span>
+          <div class="tab-meta">
+            <span class="name">Dr. Aurelia Vance</span>
+            <span class="role">Chief LLM Forensics Lead</span>
+          </div>
+        </button>
+        <button class="council-tab" data-member="1">
+          <span class="avatar">⚔️</span>
+          <div class="tab-meta">
+            <span class="name">Prof. Marcus Thorne</span>
+            <span class="role">Adversarial Robustness</span>
+          </div>
+        </button>
+        <button class="council-tab" data-member="2">
+          <span class="avatar">📊</span>
+          <div class="tab-meta">
+            <span class="name">Dr. Siobhan Chen</span>
+            <span class="role">Stylometry & Burstiness</span>
+          </div>
+        </button>
+        <button class="council-tab" data-member="3">
+          <span class="avatar">⚡</span>
+          <div class="tab-meta">
+            <span class="name">Alexei Volkov</span>
+            <span class="role">Zero-Shot Curvature</span>
+          </div>
+        </button>
+        <button class="council-tab" data-member="4">
+          <span class="avatar">🛡️</span>
+          <div class="tab-meta">
+            <span class="name">Elena Rostova</span>
+            <span class="role">Ethics & Safeguards</span>
+          </div>
+        </button>
+      </div>
+
+      <!-- Member Focus Card -->
+      <div class="council-card" id="councilCard">
+        <div class="card-header">
+          <div class="member-profile">
+            <div class="member-avatar-lg" id="memberAvatar">🔬</div>
+            <div>
+              <h3 class="member-name" id="memberName">Dr. Aurelia Vance</h3>
+              <p class="member-title" id="memberTitle">Chief AI Architect & LLM Forensics Lead (Ex-DeepMind)</p>
+            </div>
+          </div>
+          <div class="member-specialty-badge" id="memberSpecialty">Disentangled Attention & Neural Embeddings</div>
+        </div>
+
+        <div class="card-quote" id="memberQuote">
+          "The first generation of detectors collapsed because they treated detection as naive keyword matching. Real detection requires measuring whether token transitions follow human cognitive chaos or transformer probability gradients."
+        </div>
+
+        <div class="card-details-grid">
+          <div class="detail-box">
+            <span class="detail-label">Key Metric Championed</span>
+            <span class="detail-value" id="memberMetric">Disentangled Content-Position Attention (DeBERTa-v3)</span>
+          </div>
+          <div class="detail-box">
+            <span class="detail-label">Biggest Vulnerability Warned</span>
+            <span class="detail-value" id="memberWarning">Distribution Shift across unseen frontier LLMs</span>
+          </div>
+          <div class="detail-box">
+            <span class="detail-label">Recommended Action</span>
+            <span class="detail-value" id="memberAction">Dynamic Weighted Multi-Engine Ensemble</span>
+          </div>
+        </div>
+
+        <div class="council-debate-box">
+          <div class="debate-header">
+            <span class="pulse-indicator"></span>
+            <span>Live Council Consensus Directive:</span>
+          </div>
+          <p id="memberDebateNote">
+            "Never trust a single model. Build a system that corroborates statistical burstiness with zero-shot curvature drops before issuing an AI certainty verdict."
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: INTERACTIVE FORENSIC SIMULATOR -->
+  <section id="simulator" class="section-container highlight-bg">
+    <div class="section-header">
+      <div class="section-tag">LIVE INTERACTIVE LABORATORY</div>
+      <h2 class="section-title">🔬 AI Detection Forensic Simulator</h2>
+      <p class="section-subtitle">
+        Experience how multi-engine forensic analysis dissects text in real-time. Choose a preset or test your own text to inspect token probabilities, burstiness, and sentence heatmaps.
+      </p>
+    </div>
+
+    <!-- Presets Bar -->
+    <div class="presets-container">
+      <span class="presets-label">Load Test Benchmark:</span>
+      <div class="preset-buttons">
+        <button class="preset-btn active" data-preset="chatgpt">🤖 ChatGPT Essay (100% AI)</button>
+        <button class="preset-btn" data-preset="human">✍️ Human Narrative (Organic)</button>
+        <button class="preset-btn" data-preset="academic">🎓 Academic Paper (Complex Human)</button>
+        <button class="preset-btn" data-preset="humanized">🎭 Humanized AI (Stealth Paraphrase)</button>
+        <button class="preset-btn" data-preset="hybrid">🧬 Hybrid Co-Authored (50/50)</button>
+      </div>
+    </div>
+
+    <!-- Simulator Core Grid -->
+    <div class="simulator-grid">
+      <!-- Input Panel -->
+      <div class="sim-panel input-panel">
+        <div class="panel-header">
+          <div class="panel-title">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            <span>Target Text Buffer</span>
+          </div>
+          <div class="text-stats">
+            <span id="wordCount">0 words</span> • <span id="charCount">0 chars</span>
+          </div>
+        </div>
+
+        <textarea id="textInput" class="sim-textarea" placeholder="Paste or type text to inspect for AI probability signatures..."></textarea>
+
+        <div class="panel-footer">
+          <button id="clearBtn" class="secondary-btn">Clear Text</button>
+          <button id="analyzeBtn" class="primary-btn">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <span>Run Forensic Analysis</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Live Results Summary Panel -->
+      <div class="sim-panel results-panel">
+        <div class="panel-header">
+          <div class="panel-title">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            <span>Diagnostic Verdict</span>
+          </div>
+          <span class="status-badge" id="confidenceBadge">Calibrated High</span>
+        </div>
+
+        <!-- Radial Gauge & Overall Score -->
+        <div class="verdict-summary">
+          <div class="gauge-container">
+            <svg class="gauge-svg" viewBox="0 0 160 160">
+              <circle class="gauge-bg" cx="80" cy="80" r="68"></circle>
+              <circle class="gauge-fill" id="gaugeCircle" cx="80" cy="80" r="68"></circle>
+            </svg>
+            <div class="gauge-center">
+              <span class="gauge-value" id="scoreValue">0%</span>
+              <span class="gauge-label">AI PROBABILITY</span>
+            </div>
+          </div>
+
+          <div class="verdict-meta">
+            <h3 class="verdict-title" id="verdictText">Analyzing...</h3>
+            <p class="verdict-desc" id="verdictExplanation">
+              Evaluating perplexity curvature, sentence length variance, and token rank distribution.
+            </p>
+            <div class="safeguard-pill" id="safeguardPill">
+              <span>🛡️ Elena's Safeguard: Sample length validated (> 200 words)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Metrics Grid -->
+        <div class="metrics-grid">
+          <div class="metric-item">
+            <div class="metric-top">
+              <span class="m-title">Perplexity Score</span>
+              <span class="m-val" id="valPerplexity">--</span>
+            </div>
+            <div class="meter-bar"><div class="meter-fill" id="barPerplexity"></div></div>
+            <span class="m-hint">Lower = AI Predictable</span>
+          </div>
+
+          <div class="metric-item">
+            <div class="metric-top">
+              <span class="m-title">Burstiness Index</span>
+              <span class="m-val" id="valBurstiness">--</span>
+            </div>
+            <div class="meter-bar"><div class="meter-fill" id="barBurstiness"></div></div>
+            <span class="m-hint">Lower = Uniform AI rhythm</span>
+          </div>
+
+          <div class="metric-item">
+            <div class="metric-top">
+              <span class="m-title">Lexical Diversity (TTR)</span>
+              <span class="m-val" id="valTTR">--</span>
+            </div>
+            <div class="meter-bar"><div class="meter-fill" id="barTTR"></div></div>
+            <span class="m-hint">Type-Token Ratio</span>
+          </div>
+
+          <div class="metric-item">
+            <div class="metric-top">
+              <span class="m-title">Top-10 Token Dominance</span>
+              <span class="m-val" id="valTop10">--</span>
+            </div>
+            <div class="meter-bar"><div class="meter-fill" id="barTop10"></div></div>
+            <span class="m-hint">GLTR Green Probability</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Forensic Visualizer Views -->
+    <div class="visualizer-tabs-container">
+      <div class="view-tabs">
+        <button class="view-tab active" data-view="heatmap">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+          <span>Sentence-by-Sentence Heatmap</span>
+        </button>
+        <button class="view-tab" data-view="gltr">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+          <span>GLTR Token Rank Breakdown</span>
+        </button>
+        <button class="view-tab" data-view="report">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          <span>Exportable Forensic Audit Report</span>
+        </button>
+      </div>
+
+      <!-- VIEW 1: Sentence Heatmap -->
+      <div class="view-content active" id="view-heatmap">
+        <div class="heatmap-legend">
+          <span class="legend-item"><span class="legend-dot dot-human"></span> 🟢 Highly Human (&lt; 30%)</span>
+          <span class="legend-item"><span class="legend-dot dot-mixed"></span> 🟡 Mixed / Uncertain (30% - 65%)</span>
+          <span class="legend-item"><span class="legend-dot dot-ai"></span> 🔴 High AI Likelihood (&gt; 65%)</span>
+          <span class="legend-note">💡 Click any sentence below to inspect its mathematical rationale.</span>
+        </div>
+
+        <div class="heatmap-render-box" id="heatmapContainer">
+          <!-- Sentences injected here dynamically -->
+        </div>
+
+        <!-- Sentence Inspector Drawer -->
+        <div class="sentence-inspector" id="sentenceInspector">
+          <div class="inspector-header">
+            <h4>🔎 Sentence Forensics Drilldown</h4>
+            <button id="closeInspector" class="close-btn">&times;</button>
+          </div>
+          <p class="inspected-text" id="inspectedSentenceText">"..."</p>
+          <div class="inspector-stats" id="inspectedSentenceStats">
+            <!-- Dynamic stats -->
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW 2: GLTR Token Ranks -->
+      <div class="view-content" id="view-gltr">
+        <div class="gltr-legend">
+          <span class="gltr-badge g-top10">Top 10 Most Likely Token (Green)</span>
+          <span class="gltr-badge g-top100">Top 100 Token (Yellow)</span>
+          <span class="gltr-badge g-top1000">Top 1000 Token (Red)</span>
+          <span class="gltr-badge g-out">Out of Top 1000 / Creative (Purple)</span>
+        </div>
+        <p class="gltr-explanation">
+          <strong>How GLTR works:</strong> Large Language Models predominantly choose words in their Top-10 most probable distribution. Human writers frequently choose surprising words in the Purple/Red tiers.
+        </p>
+        <div class="gltr-render-box" id="gltrContainer">
+          <!-- Color coded tokens injected dynamically -->
+        </div>
+      </div>
+
+      <!-- VIEW 3: Audit Report Export -->
+      <div class="view-content" id="view-report">
+        <div class="report-box">
+          <div class="report-actions">
+            <button id="copyReportBtn" class="secondary-btn">📋 Copy Markdown</button>
+            <button id="downloadJsonBtn" class="secondary-btn">💾 Download JSON</button>
+          </div>
+          <pre class="report-pre" id="reportPre">Generating report...</pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: HOW AI DETECTION WORKS (MASTERCLASS) -->
+  <section id="masterclass" class="section-container">
+    <div class="section-header">
+      <div class="section-tag">THEORETICAL FOUNDATION</div>
+      <h2 class="section-title">📖 The 5 Detection Methodologies Explained</h2>
+      <p class="section-subtitle">
+        A deep dive into how computer scientists mathematically distinguish human thought from transformer autoregression.
+      </p>
+    </div>
+
+    <div class="masterclass-grid">
+      <!-- Method 1 -->
+      <div class="method-card">
+        <div class="method-num">01</div>
+        <h3 class="method-title">Statistical & Stylometric Analysis</h3>
+        <p class="method-summary">
+          Measures mathematical variance in sentence lengths, lexical density, and predictability scores.
+        </p>
+        <ul class="method-points">
+          <li><strong>Perplexity:</strong> Calculates \(\exp(-\frac{1}{N}\sum \log P(w_i))\). Low perplexity means the text followed the most obvious path.</li>
+          <li><strong>Burstiness:</strong> Measures \(\sigma / \mu\) of sentence word counts. Humans naturally write in irregular bursts; LLMs write with rhythmic monotony.</li>
+          <li><strong>Entropy:</strong> Evaluates the Shannon entropy of vocabulary distribution.</li>
+        </ul>
+        <div class="badge-row">
+          <span class="tech-badge">Fast (CPU-only)</span>
+          <span class="tech-badge">Explainable</span>
+          <span class="tech-badge warning">Sensitive to Length</span>
+        </div>
+      </div>
+
+      <!-- Method 2 -->
+      <div class="method-card">
+        <div class="method-num">02</div>
+        <h3 class="method-title">Zero-Shot Probability Curvature</h3>
+        <p class="method-summary">
+          Contrasts likelihood energy landscapes without requiring any labeled training datasets.
+        </p>
+        <ul class="method-points">
+          <li><strong>Binoculars:</strong> Contrasts an *Observer* model with a *Performer* model to calculate normalized cross-perplexity ratios.</li>
+          <li><strong>Fast-DetectGPT:</strong> Analyzes conditional probability curvature. Perturbing AI text causes a steep drop in likelihood compared to human text.</li>
+        </ul>
+        <div class="badge-row">
+          <span class="tech-badge">Zero Dataset Shift</span>
+          <span class="tech-badge">High SOTA Accuracy</span>
+          <span class="tech-badge">Domain Agnostic</span>
+        </div>
+      </div>
+
+      <!-- Method 3 -->
+      <div class="method-card">
+        <div class="method-num">03</div>
+        <h3 class="method-title">Disentangled Neural Classifiers</h3>
+        <p class="method-summary">
+          Deep learning models trained specifically to spot fine-grained synthetic patterns.
+        </p>
+        <ul class="method-points">
+          <li><strong>DeBERTa-v3 Large:</strong> Decouples token content embeddings from relative positional vectors. This allows the model to spot abnormal syntactic transitions.</li>
+          <li><strong>RAID Benchmark:</strong> Evaluated across 10M+ documents and 11+ frontier LLMs to prevent overfitting.</li>
+        </ul>
+        <div class="badge-row">
+          <span class="tech-badge">95%+ Controlled Accuracy</span>
+          <span class="tech-badge">Robust to Synonyms</span>
+        </div>
+      </div>
+
+      <!-- Method 4 -->
+      <div class="method-card">
+        <div class="method-num">04</div>
+        <h3 class="method-title">Cryptographic Source Watermarking</h3>
+        <p class="method-summary">
+          Embedded directly during generation by the LLM provider (e.g. SynthID-Text).
+        </p>
+        <ul class="method-points">
+          <li><strong>Token Selection Bias:</strong> A pseudo-random key partitions the vocabulary into 'green' and 'red' lists at each step, favoring green tokens imperceptibly.</li>
+          <li><strong>Detection:</strong> A statistical z-score tests whether green tokens appear with higher probability than pure chance.</li>
+        </ul>
+        <div class="badge-row">
+          <span class="tech-badge">Zero False Positives</span>
+          <span class="tech-badge warning">Requires Source Support</span>
+        </div>
+      </div>
+
+      <!-- Method 5 -->
+      <div class="method-card full-width">
+        <div class="method-num">05</div>
+        <h3 class="method-title">The Council's Multi-Engine Hybrid Consensus (Our System)</h3>
+        <p class="method-summary">
+          Combines all mathematical signals using dynamic meta-learning to achieve enterprise-level robustness against evasions.
+        </p>
+        <div class="hybrid-flow">
+          <div class="flow-step"><span>Input Text</span></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step"><span>Statistical Forensics (30%)</span></div>
+          <div class="flow-plus">+</div>
+          <div class="flow-step"><span>Zero-Shot Curvature (40%)</span></div>
+          <div class="flow-plus">+</div>
+          <div class="flow-step"><span>DeBERTa Neural (30%)</span></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step highlight"><span>Calibrated AI Score + Explainable Heatmap</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: EVASION & ADVERSARIAL ARENA -->
+  <section id="evasion" class="section-container highlight-bg">
+    <div class="section-header">
+      <div class="section-tag">ADVERSARIAL RESISTANCE</div>
+      <h2 class="section-title">⚔️ The Evasion Laboratory: Humanizers vs. Detectors</h2>
+      <p class="section-subtitle">
+        How modern AI humanizers attempt to bypass detectors, and how our multi-layered architecture catches them.
+      </p>
+    </div>
+
+    <div class="evasion-grid">
+      <div class="evasion-card">
+        <div class="evasion-badge red">ATTACK VECTOR 1</div>
+        <h3>The Synonym Scrambler (QuillBot Style)</h3>
+        <p class="evasion-desc">
+          Replaces common AI words with awkward, rare synonyms to artificially lower the Top-10 token count.
+        </p>
+        <div class="comparison-box">
+          <div class="comp-item attack">
+            <span class="comp-label">Bypasses:</span>
+            <span>Simple GLTR and word frequency counters.</span>
+          </div>
+          <div class="comp-item defense">
+            <span class="comp-label">Our Defense:</span>
+            <span><strong>DeBERTa-v3 Semantic Invariance:</strong> Contextual attention vectors capture the underlying semantic flow regardless of surface-level synonym swaps.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="evasion-card">
+        <div class="evasion-badge orange">ATTACK VECTOR 2</div>
+        <h3>Burstiness Injection (StealthWriter Style)</h3>
+        <p class="evasion-desc">
+          Artificially breaks long sentences into 2-word fragments to manipulate sentence length variance.
+        </p>
+        <div class="comparison-box">
+          <div class="comp-item attack">
+            <span class="comp-label">Bypasses:</span>
+            <span>Naive standard deviation length formulas.</span>
+          </div>
+          <div class="comp-item defense">
+            <span class="comp-label">Our Defense:</span>
+            <span><strong>Grammatical Dependency Depth:</strong> We analyze subordinate clause complexity, not just character counts or periods.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="evasion-card">
+        <div class="evasion-badge purple">ATTACK VECTOR 3</div>
+        <h3>Hybrid Co-Authoring & Partial Rewrites</h3>
+        <p class="evasion-desc">
+          A human writes the thesis and conclusion, while an AI drafts the body paragraphs.
+        </p>
+        <div class="comparison-box">
+          <div class="comp-item attack">
+            <span class="comp-label">Bypasses:</span>
+            <span>Document-level single aggregate scoring.</span>
+          </div>
+          <div class="comp-item defense">
+            <span class="comp-label">Our Defense:</span>
+            <span><strong>Sentence-by-Sentence Forensic Heatmap:</strong> Isolates the exact paragraph transitions where synthetic generation begins.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5: SYSTEM ARCHITECTURE & CODE BLUEPRINT -->
+  <section id="architecture" class="section-container">
+    <div class="section-header">
+      <div class="section-tag">ENGINEERING BLUEPRINT</div>
+      <h2 class="section-title">🗺️ Production Backend Architecture</h2>
+      <p class="section-subtitle">
+        The Python / PyTorch / FastAPI architecture designed to power the full-scale engine.
+      </p>
+    </div>
+
+    <div class="code-preview-card">
+      <div class="code-header">
+        <div class="file-tab active">
+          <span>core_engine.py (Python / PyTorch / Transformers)</span>
+        </div>
+      </div>
+      <pre class="code-block"><code><span class="kw">import</span> torch
+<span class="kw">import</span> numpy <span class="kw">as</span> np
+<span class="kw">from</span> transformers <span class="kw">import</span> AutoModelForCausalLM, AutoTokenizer, AutoModelForSequenceClassification
+
+<span class="kw">class</span> <span class="cls">FindTheAIDetector</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(self, base_model=<span class="str">"gpt2"</span>, classifier_model=<span class="str">"microsoft/deberta-v3-large"</span>):
+        <span class="comment"># 1. Statistical Perplexity & Zero-shot Tokenizer</span>
+        self.tokenizer = AutoTokenizer.from_pretrained(base_model)
+        self.lm_model = AutoModelForCausalLM.from_pretrained(base_model).eval()
+        
+    <span class="kw">def</span> <span class="fn">compute_perplexity</span>(self, text: <span class="str">str</span>) -> <span class="str">float</span>:
+        inputs = self.tokenizer(text, return_tensors=<span class="str">"pt"</span>)
+        <span class="kw">with</span> torch.no_grad():
+            loss = self.lm_model(**inputs, labels=inputs[<span class="str">"input_ids"</span>]).loss
+        <span class="kw">return</span> float(torch.exp(loss).item())
+
+    <span class="kw">def</span> <span class="fn">compute_burstiness</span>(self, sentences: <span class="str">list</span>) -> <span class="str">float</span>:
+        lens = [len(s.split()) <span class="kw">for</span> s <span class="kw">in</span> sentences <span class="kw">if</span> len(s.strip()) > 0]
+        <span class="kw">if</span> len(lens) &lt;= 1: <span class="kw">return</span> 0.0
+        <span class="kw">return</span> float(np.std(lens) / (np.mean(lens) + 1e-8))
+
+    <span class="kw">def</span> <span class="fn">ensemble_predict</span>(self, text: <span class="str">str</span>) -> <span class="str">dict</span>:
+        sentences = [s.strip() <span class="kw">for</span> s <span class="kw">in</span> text.split(<span class="str">"."</span>) <span class="kw">if</span> len(s.strip()) > 0]
+        ppl = self.compute_perplexity(text)
+        burst = self.compute_burstiness(sentences)
+        
+        <span class="comment"># Calibrated Sigmoidal Probability Scaling</span>
+        prob_ppl = 1.0 / (1.0 + np.exp((ppl - 42.0) / 8.0))
+        prob_burst = 1.0 / (1.0 + np.exp((burst - 0.45) / 0.15))
+        
+        ai_score = (0.55 * prob_ppl + 0.45 * prob_burst) * 100
+        <span class="kw">return</span> {
+            <span class="str">"ai_percentage"</span>: round(ai_score, 2),
+            <span class="str">"perplexity"</span>: round(ppl, 2),
+            <span class="str">"burstiness"</span>: round(burst, 2),
+            <span class="str">"sentence_count"</span>: len(sentences)
+        }</code></pre>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <span class="brand-title">FIND THE <span class="gradient-text">AI</span></span>
+        <p>An open research and interactive forensics observatory created by <strong>Yash Dhiraj Oza</strong>.</p>
+      </div>
+
+      <div class="footer-links">
+        <a href="https://github.com/YashDhirajOza/FIND-THE-AI-" target="_blank" rel="noreferrer">GitHub Repository</a>
+        <a href="#council">AI Council Debate</a>
+        <a href="#simulator">Detection Simulator</a>
+        <a href="#masterclass">Forensics Masterclass</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 FIND THE AI Project • Built for precision, explainability, and ethical synthetic forensics.</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
