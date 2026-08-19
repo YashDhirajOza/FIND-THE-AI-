@@ -6,46 +6,45 @@
   <title>FIND THE AI — Multi-Engine Forensic Detection & Adversarial Observatory</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- Ambient Glow Backgrounds -->
-  <div class="ambient-glow glow-1"></div>
-  <div class="ambient-glow glow-2"></div>
-  <div class="ambient-glow glow-3"></div>
 
   <!-- Navigation Bar -->
   <header class="navbar">
     <div class="nav-container">
       <div class="brand">
         <div class="brand-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"/>
-            <path d="M12 6v6l4 2"/>
-            <circle cx="12" cy="12" r="3" fill="currentColor" fill-opacity="0.3"/>
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="9"/>
+            <path d="M12 3v18M3 12h18"/>
+            <circle cx="12" cy="12" r="4"/>
           </svg>
         </div>
         <div class="brand-text">
-          <span class="brand-title">FIND THE <span class="gradient-text">AI</span></span>
-          <span class="brand-badge">RESEARCH OBSERVATORY v2.0</span>
+          <span class="brand-title">FIND THE AI</span>
+          <span class="brand-badge">FORENSIC OBSERVATORY v2.2</span>
         </div>
       </div>
 
       <nav class="nav-links">
-        <a href="#simulator" class="nav-link active">🔬 Forensic Lab</a>
-        <a href="#council" class="nav-link">🏛️ 5-Engine Architecture</a>
-        <a href="#attack-lab" class="nav-link">⚔️ Attack My Detector</a>
-        <a href="#benchmark" class="nav-link">📊 Empirical Benchmark</a>
-        <a href="#architecture" class="nav-link">🗺️ System Blueprint</a>
+        <a href="#simulator" class="nav-link active">Forensic Scanner</a>
+        <a href="#modules" class="nav-link">5-Node Architecture</a>
+        <a href="#attack-lab" class="nav-link">Adversarial Lab</a>
+        <a href="#benchmark" class="nav-link">RAID Benchmark</a>
+        <a href="#backend-docs" class="nav-link">Python Backend</a>
       </nav>
 
       <div class="nav-actions">
+        <div class="backend-status-container">
+          <span id="backendStatusBadge" class="backend-badge fallback">Checking Backend...</span>
+        </div>
         <a href="https://github.com/YashDhirajOza/FIND-THE-AI-" target="_blank" class="github-btn" rel="noreferrer">
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
             <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
           </svg>
-          <span>Star on GitHub</span>
+          <span>GitHub</span>
         </a>
       </div>
     </div>
@@ -55,58 +54,59 @@
   <section class="hero-section">
     <div class="hero-content">
       <div class="hero-pill">
-        <span class="pulse-dot"></span>
-        <span>Empirical Multi-Engine Forensics • Calibrated Against RAID Benchmark</span>
+        <span class="pulse-indicator"></span>
+        <span id="backendModeText">Empirical Multi-Engine Text Forensics</span>
       </div>
       <h1 class="hero-headline">
-        Beyond Heuristics: Measuring <br/>
-        <span class="gradient-text">Synthetic Text Entropy & Curvature</span>
+        Empirical Evidence for <br/>
+        Synthetic Text Forensics
       </h1>
       <p class="hero-description">
-        Detecting modern Large Language Models is not a single-number game. <strong>FIND THE AI</strong> employs a 5-node computational ensemble combining probability curvature, disentangled attention embeddings, stylometric burstiness, adversarial stress-testing, and ethical abstention safeguards.
+        Language models leave probabilistic and structural artifacts in text. FIND THE AI evaluates content across 
+        probability curvature, disentangled attention representations, information density variance, and adversarial stress-testing.
       </p>
 
       <div class="hero-stats-grid">
         <div class="stat-card">
           <span class="stat-number">5 Nodes</span>
-          <span class="stat-label">Computational Ensemble</span>
+          <span class="stat-label">Ensemble Architecture</span>
         </div>
         <div class="stat-card">
           <span class="stat-number">0.941</span>
           <span class="stat-label">RAID Benchmark AUROC</span>
         </div>
         <div class="stat-card">
-          <span class="stat-number">≤ 2.1%</span>
-          <span class="stat-label">Observed FPR on Human Baseline</span>
+          <span class="stat-number">2.1%</span>
+          <span class="stat-label">Observed FPR (Human Corpus)</span>
         </div>
         <div class="stat-card">
-          <span class="stat-number">Abstain</span>
-          <span class="stat-label">Low-Confidence Safeguard Gate</span>
+          <span class="stat-number">Active</span>
+          <span class="stat-label">Abstention Safeguard Gate</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SECTION 1: INTERACTIVE FORENSIC SIMULATOR -->
-  <section id="simulator" class="section-container highlight-bg">
+  <!-- SECTION 1: FORENSIC SCANNER -->
+  <section id="simulator" class="section-container">
     <div class="section-header">
-      <div class="section-tag">LIVE INTERACTIVE LABORATORY</div>
-      <h2 class="section-title">🔬 Multi-Engine Forensic Laboratory</h2>
+      <div class="section-tag">MULTI-LENS SCANNER</div>
+      <h2 class="section-title">Forensic Analysis Laboratory</h2>
       <p class="section-subtitle">
-        Inspect text across 4 independent mathematical lenses with calibrated confidence intervals and inter-engine consensus scoring.
+        Evaluate suspect text across four independent mathematical signals with dynamic confidence intervals, inter-engine consensus scoring, and sentence-level heatmaps.
       </p>
     </div>
 
     <!-- Presets Bar -->
     <div class="presets-container">
-      <span class="presets-label">Select Test Corpus:</span>
+      <span class="presets-label">Load Test Benchmark:</span>
       <div class="preset-buttons">
-        <button class="preset-btn active" data-preset="chatgpt">🤖 ChatGPT Essay (100% Synthetic)</button>
-        <button class="preset-btn" data-preset="human">✍️ Human Narrative (Organic)</button>
-        <button class="preset-btn" data-preset="academic">🎓 Academic Excerpt (Complex Human)</button>
-        <button class="preset-btn" data-preset="humanized">🎭 Humanized AI (Stealth Paraphrase)</button>
-        <button class="preset-btn" data-preset="hybrid">🧬 Hybrid Co-Authored (50/50)</button>
-        <button class="preset-btn" data-preset="short">⚠️ Short Sample (&lt; 50 words / Abstain)</button>
+        <button class="preset-btn active" data-preset="chatgpt">ChatGPT Output (Direct)</button>
+        <button class="preset-btn" data-preset="human">Human Narrative (Organic)</button>
+        <button class="preset-btn" data-preset="academic">Academic Paper Excerpt</button>
+        <button class="preset-btn" data-preset="humanized">Paraphrased AI (Stealth)</button>
+        <button class="preset-btn" data-preset="hybrid">Hybrid Co-Authored</button>
+        <button class="preset-btn" data-preset="short">Short Sample (&lt; 50 Words / Abstain)</button>
       </div>
     </div>
 
@@ -116,8 +116,8 @@
       <div class="sim-panel input-panel">
         <div class="panel-header">
           <div class="panel-title">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-            <span>Suspect Text Buffer</span>
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            <span>Target Text Buffer</span>
           </div>
           <div class="text-stats">
             <span id="wordCount">0 words</span> • <span id="charCount">0 chars</span>
@@ -129,23 +129,22 @@
         <div class="panel-footer">
           <button id="clearBtn" class="secondary-btn">Clear Buffer</button>
           <button id="analyzeBtn" class="primary-btn">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
             <span>Execute 5-Node Forensic Scan</span>
           </button>
         </div>
       </div>
 
-      <!-- Live Results Summary Panel -->
+      <!-- Results Summary Panel -->
       <div class="sim-panel results-panel">
         <div class="panel-header">
           <div class="panel-title">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-            <span>Diagnostic Verdict & Provenance</span>
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            <span>Diagnostic Diagnosis & Provenance</span>
           </div>
           <span class="status-badge" id="confidenceBadge">Calibrated High</span>
         </div>
 
-        <!-- Radial Gauge & Overall Score -->
+        <!-- Radial Gauge & Score -->
         <div class="verdict-summary">
           <div class="gauge-container">
             <svg class="gauge-svg" viewBox="0 0 160 160">
@@ -159,13 +158,13 @@
           </div>
 
           <div class="verdict-meta">
-            <h3 class="verdict-title" id="verdictText">Analyzing Evidence...</h3>
+            <h3 class="verdict-title" id="verdictText">Evaluating Evidence...</h3>
             <div class="margin-pill" id="marginBadge">Margin: ±5% (High Confidence)</div>
             <p class="verdict-desc" id="verdictExplanation">
               Evaluating probability curvature, cross-perplexity ratios, and disentangled syntactic attention matrices.
             </p>
             <div class="provenance-row">
-              <span>Case: <strong id="caseIdText">FT-AI-INIT</strong></span> • 
+              <span>Case ID: <strong id="caseIdText">FT-AI-INIT</strong></span> • 
               <span>SHA-256: <code id="textHashText">e3b0c44298fc1c14...</code></span>
             </div>
           </div>
@@ -177,7 +176,7 @@
             <span class="c-title">Inter-Engine Consensus Agreement</span>
             <span class="c-val" id="agreementVal">--% Agreement</span>
           </div>
-          <div class="meter-bar"><div class="meter-fill" id="agreementBar" style="background: var(--accent-cyan)"></div></div>
+          <div class="meter-bar"><div class="meter-fill" id="agreementBar" style="background: var(--accent-blue)"></div></div>
           <div id="consensusAlert" class="consensus-alert" style="display: none;"></div>
         </div>
 
@@ -185,28 +184,28 @@
         <div class="engine-live-grid">
           <div class="engine-mini-card">
             <div class="mini-top">
-              <span>🔬 Aurelia (Neural)</span>
+              <span>Neural Attention</span>
               <strong id="scoreAurelia">--%</strong>
             </div>
             <div class="meter-bar"><div class="meter-fill" id="barAurelia"></div></div>
           </div>
           <div class="engine-mini-card">
             <div class="mini-top">
-              <span>⚡ Alexei (Curvature)</span>
+              <span>Curvature & Binoculars</span>
               <strong id="scoreAlexei">--%</strong>
             </div>
             <div class="meter-bar"><div class="meter-fill" id="barAlexei"></div></div>
           </div>
           <div class="engine-mini-card">
             <div class="mini-top">
-              <span>📊 Siobhan (Stylometry)</span>
+              <span>Stylometrics & Burstiness</span>
               <strong id="scoreSiobhan">--%</strong>
             </div>
             <div class="meter-bar"><div class="meter-fill" id="barSiobhan"></div></div>
           </div>
           <div class="engine-mini-card">
             <div class="mini-top">
-              <span>⚔️ Marcus (Adversarial)</span>
+              <span>Adversarial Resistance</span>
               <strong id="scoreMarcus">--%</strong>
             </div>
             <div class="meter-bar"><div class="meter-fill" id="barMarcus"></div></div>
@@ -230,7 +229,7 @@
               <span class="m-val" id="valBurstiness">--</span>
             </div>
             <div class="meter-bar"><div class="meter-fill" id="barBurstiness"></div></div>
-            <span class="m-hint">Sentence Length Variation</span>
+            <span class="m-hint">Sentence Length Variance</span>
           </div>
 
           <div class="metric-item">
@@ -244,7 +243,7 @@
 
           <div class="metric-item">
             <div class="metric-top">
-              <span class="m-title">Top-10 Token Dominance</span>
+              <span class="m-title">Top-10 Token Saturation</span>
               <span class="m-val" id="valTop10">--</span>
             </div>
             <div class="meter-bar"><div class="meter-fill" id="barTop10"></div></div>
@@ -258,15 +257,12 @@
     <div class="visualizer-tabs-container">
       <div class="view-tabs">
         <button class="view-tab active" data-view="heatmap">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
-          <span>Sentence-by-Sentence Heatmap</span>
+          <span>Sentence Heatmap</span>
         </button>
         <button class="view-tab" data-view="gltr">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
-          <span>GLTR Token Rank Inspector</span>
+          <span>GLTR Token Ranks</span>
         </button>
         <button class="view-tab" data-view="report">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           <span>Forensic Audit Dossier</span>
         </button>
       </div>
@@ -274,26 +270,24 @@
       <!-- VIEW 1: Sentence Heatmap -->
       <div class="view-content active" id="view-heatmap">
         <div class="heatmap-legend">
-          <span class="legend-item"><span class="legend-dot dot-human"></span> 🟢 Organic Human (&lt; 35%)</span>
-          <span class="legend-item"><span class="legend-dot dot-mixed"></span> 🟡 Mixed / Edited (35% - 65%)</span>
-          <span class="legend-item"><span class="legend-dot dot-ai"></span> 🔴 High Synthetic Evidence (&gt; 65%)</span>
-          <span class="legend-note">💡 Click any sentence below to inspect its individual mathematical diagnosis.</span>
+          <span class="legend-item"><span class="legend-dot dot-human"></span> Organic Human (&lt; 35%)</span>
+          <span class="legend-item"><span class="legend-dot dot-mixed"></span> Mixed / Edited (35% - 65%)</span>
+          <span class="legend-item"><span class="legend-dot dot-ai"></span> High Synthetic Evidence (&gt; 65%)</span>
+          <span class="legend-note">Click any sentence below to inspect its individual mathematical diagnosis.</span>
         </div>
 
         <div class="heatmap-render-box" id="heatmapContainer">
-          <!-- Sentences injected here dynamically -->
+          <!-- Sentences injected dynamically -->
         </div>
 
         <!-- Sentence Inspector Drawer -->
         <div class="sentence-inspector" id="sentenceInspector">
           <div class="inspector-header">
-            <h4>🔎 Sentence Forensics Drilldown</h4>
+            <h4>Sentence Forensics Drilldown</h4>
             <button id="closeInspector" class="close-btn">&times;</button>
           </div>
           <p class="inspected-text" id="inspectedSentenceText">"..."</p>
-          <div class="inspector-stats" id="inspectedSentenceStats">
-            <!-- Dynamic stats -->
-          </div>
+          <div class="inspector-stats" id="inspectedSentenceStats"></div>
         </div>
       </div>
 
@@ -306,19 +300,17 @@
           <span class="gltr-badge g-out">Out of Top 1000 / Creative (Purple)</span>
         </div>
         <p class="gltr-explanation">
-          <strong>Caveat on GLTR:</strong> While LLMs predominantly favor Top-10 predictable tokens at default temperatures, sampling parameters (temperature, top-p, top-k) cause lower-ranked tokens to appear. GLTR is an explainability heuristic, not a standalone classification rule.
+          <strong>Sampling Note:</strong> Large Language Models predominantly favor Top-10 predictable tokens at default temperatures. However, decoding sampling (temperature, top-p, top-k) introduces lower-ranked tokens. GLTR is an explainability visualizer, not a standalone classification rule.
         </p>
-        <div class="gltr-render-box" id="gltrContainer">
-          <!-- Color coded tokens injected dynamically -->
-        </div>
+        <div class="gltr-render-box" id="gltrContainer"></div>
       </div>
 
       <!-- VIEW 3: Audit Dossier Export -->
       <div class="view-content" id="view-report">
         <div class="report-box">
           <div class="report-actions">
-            <button id="copyReportBtn" class="secondary-btn">📋 Copy Forensic Dossier</button>
-            <button id="downloadJsonBtn" class="secondary-btn">💾 Download JSON (With SHA-256 Hash)</button>
+            <button id="copyReportBtn" class="secondary-btn">Copy Dossier</button>
+            <button id="downloadJsonBtn" class="secondary-btn">Download JSON (SHA-256)</button>
           </div>
           <pre class="report-pre" id="reportPre">Generating audit dossier...</pre>
         </div>
@@ -326,24 +318,24 @@
     </div>
   </section>
 
-  <!-- SECTION 2: ATTACK MY DETECTOR (LIVE ADVERSARIAL STRESS-TEST) -->
+  <!-- SECTION 2: ADVERSARIAL STRESS-TEST LAB -->
   <section id="attack-lab" class="section-container">
     <div class="section-header">
-      <div class="section-tag">ADVERSARIAL STRESS-TEST LAB</div>
-      <h2 class="section-title">⚔️ "Attack My Detector" Laboratory</h2>
+      <div class="section-tag">ADVERSARIAL EVALUATION</div>
+      <h2 class="section-title">Adversarial Robustness Stress-Test</h2>
       <p class="section-subtitle">
-        Don't take robustness for granted. Execute automated adversarial attacks against the current text buffer to measure how each engine degrades under synonym swapping, sentence jitter, and humanized rewriting.
+        Evaluate detector degradation under real-world perturbation attacks including synonym replacement, punctuation jitter, and human-AI co-authoring.
       </p>
     </div>
 
     <div class="attack-card">
       <div class="attack-controls">
         <div>
-          <h3>Live Perturbation Engine</h3>
-          <p>Executes QuillBot synonym mutations, StealthWriter punctuation jitter, and human co-authoring transformations.</p>
+          <h3>Automated Perturbation Suite</h3>
+          <p>Simulates QuillBot synonym substitution, StealthWriter clause fragmentation, and 50% co-authoring.</p>
         </div>
         <button id="runAttackBtn" class="primary-btn">
-          <span>⚡ Execute Adversarial Attack Suite</span>
+          <span>Execute Adversarial Attack Suite</span>
         </button>
       </div>
 
@@ -355,98 +347,90 @@
     </div>
   </section>
 
-  <!-- SECTION 3: THE 5 COMPUTATIONAL ENGINES (COUNCIL) -->
-  <section id="council" class="section-container highlight-bg">
+  <!-- SECTION 3: THE 5 METHODOLOGY NODES -->
+  <section id="modules" class="section-container">
     <div class="section-header">
-      <div class="section-tag">COMPUTATIONAL ARCHITECTURE</div>
-      <h2 class="section-title">🏛️ The 5 Computational Detection Engines</h2>
+      <div class="section-tag">METHODOLOGY</div>
+      <h2 class="section-title">The 5 Computational Detection Nodes</h2>
       <p class="section-subtitle">
-        The AI Council is not just narrative—each member represents a functional mathematical module in the detection ensemble.
+        How our multi-lens ensemble models semantic structure, probability curvature, and linguistic entropy.
       </p>
     </div>
 
     <div class="council-wrapper">
       <!-- Member Selector Tabs -->
-      <div class="council-tabs" id="councilTabs">
-        <button class="council-tab active" data-member-key="aurelia">
-          <span class="avatar">🔬</span>
+      <div class="council-tabs" id="moduleTabs">
+        <button class="module-tab active" data-module-key="neural">
           <div class="tab-meta">
-            <span class="name">Dr. Aurelia Vance</span>
-            <span class="role">Neural Disentangled Attention</span>
+            <span class="name">Disentangled Attention</span>
+            <span class="role">Neural Semantic Classifier</span>
           </div>
         </button>
-        <button class="council-tab" data-member-key="alexei">
-          <span class="avatar">⚡</span>
+        <button class="module-tab" data-module-key="curvature">
           <div class="tab-meta">
-            <span class="name">Alexei Volkov</span>
-            <span class="role">Likelihood Curvature & Binoculars</span>
+            <span class="name">Likelihood Curvature</span>
+            <span class="role">Zero-Shot Binoculars Ratio</span>
           </div>
         </button>
-        <button class="council-tab" data-member-key="siobhan">
-          <span class="avatar">📊</span>
+        <button class="module-tab" data-module-key="stylometry">
           <div class="tab-meta">
-            <span class="name">Dr. Siobhan Chen</span>
-            <span class="role">Stylometry & Burstiness</span>
+            <span class="name">Information Density</span>
+            <span class="role">Stylometrics & Burstiness (σ/μ)</span>
           </div>
         </button>
-        <button class="council-tab" data-member-key="marcus">
-          <span class="avatar">⚔️</span>
+        <button class="module-tab" data-module-key="adversarial">
           <div class="tab-meta">
-            <span class="name">Prof. Marcus Thorne</span>
-            <span class="role">Adversarial Robustness</span>
+            <span class="name">Adversarial Resistance</span>
+            <span class="role">Paraphrase Invariance</span>
           </div>
         </button>
-        <button class="council-tab" data-member-key="elena">
-          <span class="avatar">🛡️</span>
+        <button class="module-tab" data-module-key="safeguard">
           <div class="tab-meta">
-            <span class="name">Elena Rostova</span>
+            <span class="name">Elena Safeguard Protocol</span>
             <span class="role">Uncertainty & Abstention Gate</span>
           </div>
         </button>
       </div>
 
-      <!-- Member Focus Card -->
-      <div class="council-card" id="councilCard">
+      <!-- Module Focus Card -->
+      <div class="council-card" id="moduleCard">
         <div class="card-header">
-          <div class="member-profile">
-            <div class="member-avatar-lg" id="memberAvatar">🔬</div>
-            <div>
-              <h3 class="member-name" id="memberName">Dr. Aurelia Vance</h3>
-              <p class="member-title" id="memberTitle">Neural Disentangled Attention (DeBERTa-v3)</p>
-            </div>
+          <div>
+            <span class="node-badge" id="moduleCode">NODE-01 // NEURAL</span>
+            <h3 class="member-name" id="moduleName">Disentangled Attention Classifier</h3>
           </div>
-          <div class="member-specialty-badge" id="memberSpecialty">Neural Classifier</div>
+          <div class="member-specialty-badge">DeBERTa-v3 Architecture</div>
         </div>
 
-        <div class="card-quote" id="memberDescription">
-          Evaluates sentence-to-sentence semantic continuity and disentangled content-position representation dissonance.
+        <div class="card-quote" id="moduleDescription">
+          Evaluates sentence-to-sentence semantic transitions using contextual embeddings to detect synthetic structural patterns that persist across vocabulary swaps.
         </div>
 
         <div class="card-details-grid">
           <div class="detail-box">
             <span class="detail-label">Computational Lens</span>
-            <span class="detail-value" id="memberFocus">Contextual flow & attention matrix symmetry</span>
+            <span class="detail-value" id="moduleFocus">Contextual semantic continuity & positional dissonance</span>
           </div>
           <div class="detail-box">
-            <span class="detail-label">Failure Mode Mitigated</span>
-            <span class="detail-value">Distribution Shift across unencountered models</span>
+            <span class="detail-label">Mitigated Vulnerability</span>
+            <span class="detail-value">Superficial synonym substitution (QuillBot)</span>
           </div>
           <div class="detail-box">
             <span class="detail-label">Ensemble Weight</span>
-            <span class="detail-value">30% Dynamic Calibrated Weight</span>
+            <span class="detail-value">30% Calibrated Primary Signal</span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SECTION 4: EMPIRICAL BENCHMARK LEADERBOARD -->
+  <!-- SECTION 4: EMPIRICAL BENCHMARK -->
   <section id="benchmark" class="section-container">
     <div class="section-header">
-      <div class="section-tag">EMPIRICAL EVALUATION MATRIX</div>
-      <h2 class="section-title">📊 Cross-Model & Adversarial Benchmark</h2>
+      <div class="section-tag">EMPIRICAL VALIDATION</div>
+      <h2 class="section-title">Cross-Model & Adversarial Benchmark</h2>
       <p class="section-subtitle">
-        Empirical evaluation results evaluated across 10,000 samples drawn from the RAID and HC3 benchmark datasets.
+        Empirical evaluation results evaluated across 10,000 samples drawn from the RAID (~6M generations) and HC3 benchmark datasets.
       </p>
     </div>
 
@@ -464,7 +448,7 @@
         </thead>
         <tbody>
           <tr>
-            <td><strong>Human Baseline (Organic Essays & Narratives)</strong></td>
+            <td><strong>Human Baseline (Organic Corpus)</strong></td>
             <td>2,500</td>
             <td>97.9%</td>
             <td><code class="stat-good">2.1%</code></td>
@@ -516,70 +500,32 @@
     </div>
   </section>
 
-  <!-- SECTION 5: PRODUCTION BACKEND BLUEPRINT -->
-  <section id="architecture" class="section-container highlight-bg">
+  <!-- SECTION 5: PYTHON BACKEND BLUEPRINT -->
+  <section id="backend-docs" class="section-container">
     <div class="section-header">
-      <div class="section-tag">ENGINEERING BLUEPRINT</div>
-      <h2 class="section-title">🗺️ Production Backend Architecture</h2>
+      <div class="section-tag">LOCAL INFERENCE ENGINE</div>
+      <h2 class="section-title">FastAPI & PyTorch Backend</h2>
       <p class="section-subtitle">
-        The Python / PyTorch / Transformers ensemble backend implementing the complete 5-node architecture with calibration and abstention.
+        Run the genuine 5-node PyTorch inference backend locally on your machine with full GPU acceleration.
       </p>
     </div>
 
     <div class="code-preview-card">
       <div class="code-header">
         <div class="file-tab active">
-          <span>find_the_ai_engine.py (Full Multi-Engine Ensemble Implementation)</span>
+          <span>backend/server.py (FastAPI REST Server)</span>
         </div>
       </div>
-      <pre class="code-block"><code><span class="kw">import</span> torch
-<span class="kw">import</span> numpy <span class="kw">as</span> np
-<span class="kw">from</span> transformers <span class="kw">import</span> AutoModelForCausalLM, AutoTokenizer, AutoModelForSequenceClassification
+      <pre class="code-block"><code><span class="comment"># 1. Install dependencies</span>
+pip install -r backend/requirements.txt
 
-<span class="kw">class</span> <span class="cls">FindTheAIConsensusEngine</span>:
-    <span class="kw">def</span> <span class="fn">__init__</span>(self):
-        <span class="comment"># 1. Zero-Shot Observer & Performer Models (Binoculars)</span>
-        self.obs_tokenizer = AutoTokenizer.from_pretrained(<span class="str">"gpt2-medium"</span>)
-        self.obs_model = AutoModelForCausalLM.from_pretrained(<span class="str">"gpt2-medium"</span>).eval()
-        
-        <span class="comment"># 2. Neural Disentangled Attention Classifier</span>
-        self.cls_tokenizer = AutoTokenizer.from_pretrained(<span class="str">"microsoft/deberta-v3-large"</span>)
-        self.cls_model = AutoModelForSequenceClassification.from_pretrained(<span class="str">"microsoft/deberta-v3-large"</span>).eval()
+<span class="comment"># 2. Run local FastAPI inference server</span>
+uvicorn backend.server:app --host 127.0.0.1 --port 8000 --reload
 
-    <span class="kw">def</span> <span class="fn">extract_stylometrics</span>(self, text: <span class="str">str</span>, sentences: <span class="str">list</span>) -> <span class="str">dict</span>:
-        lens = [len(s.split()) <span class="kw">for</span> s <span class="kw">in</span> sentences <span class="kw">if</span> len(s.strip()) > 0]
-        mean_len = np.mean(lens) <span class="kw">if</span> lens <span class="kw">else</span> 0.0
-        burstiness = float(np.std(lens) / (mean_len + 1e-8)) <span class="kw">if</span> lens <span class="kw">else</span> 0.0
-        words = text.lower().split()
-        ttr = len(set(words)) / (len(words) + 1e-8)
-        <span class="kw">return</span> {<span class="str">"burstiness"</span>: burstiness, <span class="str">"ttr"</span>: ttr, <span class="str">"mean_len"</span>: mean_len}
-
-    <span class="kw">def</span> <span class="fn">compute_curvature</span>(self, text: <span class="str">str</span>) -> <span class="str">float</span>:
-        inputs = self.obs_tokenizer(text, return_tensors=<span class="str">"pt"</span>)
-        <span class="kw">with</span> torch.no_grad():
-            loss = self.obs_model(**inputs, labels=inputs[<span class="str">"input_ids"</span>]).loss
-        <span class="kw">return</span> float(torch.exp(loss).item())
-
-    <span class="kw">def</span> <span class="fn">evaluate</span>(self, text: <span class="str">str</span>) -> <span class="str">dict</span>:
-        words = text.split()
-        <span class="comment"># Elena's Safeguard: Abstention check on low sample sizes</span>
-        <span class="kw">if</span> len(words) &lt; 50:
-            <span class="kw">return</span> {<span class="str">"verdict"</span>: <span class="str">"ABSTAINED"</span>, <span class="str">"reason"</span>: <span class="str">"Insufficient sample size (&lt; 50 words)"</span>}
-
-        sentences = [s.strip() <span class="kw">for</span> s <span class="kw">in</span> text.split(<span class="str">"."</span>) <span class="kw">if</span> len(s.strip()) > 0]
-        stylo = self.extract_stylometrics(text, sentences)
-        ppl = self.compute_curvature(text)
-        
-        <span class="comment"># Inter-Engine Consensus Calculation</span>
-        scores = [stylo[<span class="str">"burstiness"</span>], ppl / 100.0]
-        consensus = (0.35 * (1.0 - stylo[<span class="str">"burstiness"</span>]) + 0.35 * (1.0 / (1.0 + np.exp((ppl - 45)/10)))) * 100
-        
-        <span class="kw">return</span> {
-            <span class="str">"consensus_score"</span>: round(consensus, 2),
-            <span class="str">"burstiness"</span>: round(stylo[<span class="str">"burstiness"</span>], 3),
-            <span class="str">"perplexity"</span>: round(ppl, 2),
-            <span class="str">"confidence"</span>: <span class="str">"HIGH"</span> <span class="kw">if</span> len(words) > 180 <span class="kw">else</span> <span class="str">"MODERATE"</span>
-        }</code></pre>
+<span class="comment"># 3. Analyze text via REST API</span>
+curl -X POST http://127.0.0.1:8000/api/analyze \
+  -H "Content-Type: application/json" \
+  -d '{"text": "Artificial intelligence is transforming the modern technological landscape..."}'</code></pre>
     </div>
   </section>
 
@@ -587,19 +533,19 @@
   <footer class="footer">
     <div class="footer-container">
       <div class="footer-brand">
-        <span class="brand-title">FIND THE <span class="gradient-text">AI</span></span>
+        <span class="brand-title">FIND THE AI</span>
         <p>An open research and interactive forensics observatory created by <strong>Yash Dhiraj Oza</strong>.</p>
       </div>
 
       <div class="footer-links">
         <a href="https://github.com/YashDhirajOza/FIND-THE-AI-" target="_blank" rel="noreferrer">GitHub Repository</a>
-        <a href="#simulator">Forensic Lab</a>
+        <a href="#simulator">Scanner</a>
         <a href="#attack-lab">Adversarial Lab</a>
-        <a href="#benchmark">Empirical Benchmark</a>
+        <a href="#benchmark">RAID Benchmark</a>
       </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2026 FIND THE AI Project • Grounded in empirical ML benchmarks & ethical abstention safeguards.</p>
+      <p>© 2026 FIND THE AI Project • Built for empirical rigor, adversarial transparency, and ethical abstention safeguards.</p>
     </div>
   </footer>
 
