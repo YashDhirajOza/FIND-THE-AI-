@@ -24,7 +24,7 @@
         </div>
         <div class="brand-text">
           <span class="brand-title">FIND THE AI</span>
-          <span class="brand-badge">FORENSIC OBSERVATORY v2.2</span>
+          <span class="brand-badge">FORENSIC OBSERVATORY v2.3</span>
         </div>
       </div>
 
@@ -50,8 +50,22 @@
     </div>
   </header>
 
-  <!-- Hero Section -->
+  <!-- Hero Section with Interactive 3D Canvas -->
   <section class="hero-section">
+    <!-- 3D Interactive WebGL/Canvas Layer -->
+    <div class="hero-3d-wrapper">
+      <canvas id="hero3dCanvas" class="hero-3d-canvas"></canvas>
+      <div class="canvas-overlay-vignette"></div>
+      
+      <!-- 3D Scene Controls -->
+      <div class="scene-controls">
+        <span class="scene-ctrl-label">3D Forensic Engine:</span>
+        <button class="scene-btn active" data-scene-mode="curvature">Probability Landscape</button>
+        <button class="scene-btn" data-scene-mode="lattice">Neural Lattice</button>
+        <button class="scene-btn" data-scene-mode="polyhedron">Forensic Geometry</button>
+      </div>
+    </div>
+
     <div class="hero-content">
       <div class="hero-pill">
         <span class="pulse-indicator"></span>
@@ -67,19 +81,19 @@
       </p>
 
       <div class="hero-stats-grid">
-        <div class="stat-card">
+        <div class="stat-card" data-tilt>
           <span class="stat-number">5 Nodes</span>
           <span class="stat-label">Ensemble Architecture</span>
         </div>
-        <div class="stat-card">
+        <div class="stat-card" data-tilt>
           <span class="stat-number">0.941</span>
           <span class="stat-label">RAID Benchmark AUROC</span>
         </div>
-        <div class="stat-card">
+        <div class="stat-card" data-tilt>
           <span class="stat-number">2.1%</span>
           <span class="stat-label">Observed FPR (Human Corpus)</span>
         </div>
-        <div class="stat-card">
+        <div class="stat-card" data-tilt>
           <span class="stat-number">Active</span>
           <span class="stat-label">Abstention Safeguard Gate</span>
         </div>
@@ -113,7 +127,7 @@
     <!-- Simulator Core Grid -->
     <div class="simulator-grid">
       <!-- Input Panel -->
-      <div class="sim-panel input-panel">
+      <div class="sim-panel input-panel" data-tilt>
         <div class="panel-header">
           <div class="panel-title">
             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
@@ -135,7 +149,7 @@
       </div>
 
       <!-- Results Summary Panel -->
-      <div class="sim-panel results-panel">
+      <div class="sim-panel results-panel" data-tilt>
         <div class="panel-header">
           <div class="panel-title">
             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
@@ -328,7 +342,7 @@
       </p>
     </div>
 
-    <div class="attack-card">
+    <div class="attack-card" data-tilt>
       <div class="attack-controls">
         <div>
           <h3>Automated Perturbation Suite</h3>
@@ -360,31 +374,31 @@
     <div class="council-wrapper">
       <!-- Member Selector Tabs -->
       <div class="council-tabs" id="moduleTabs">
-        <button class="module-tab active" data-module-key="neural">
+        <button class="module-tab active" data-module-key="neural" data-tilt>
           <div class="tab-meta">
             <span class="name">Disentangled Attention</span>
             <span class="role">Neural Semantic Classifier</span>
           </div>
         </button>
-        <button class="module-tab" data-module-key="curvature">
+        <button class="module-tab" data-module-key="curvature" data-tilt>
           <div class="tab-meta">
             <span class="name">Likelihood Curvature</span>
             <span class="role">Zero-Shot Binoculars Ratio</span>
           </div>
         </button>
-        <button class="module-tab" data-module-key="stylometry">
+        <button class="module-tab" data-module-key="stylometry" data-tilt>
           <div class="tab-meta">
             <span class="name">Information Density</span>
             <span class="role">Stylometrics & Burstiness (σ/μ)</span>
           </div>
         </button>
-        <button class="module-tab" data-module-key="adversarial">
+        <button class="module-tab" data-module-key="adversarial" data-tilt>
           <div class="tab-meta">
             <span class="name">Adversarial Resistance</span>
             <span class="role">Paraphrase Invariance</span>
           </div>
         </button>
-        <button class="module-tab" data-module-key="safeguard">
+        <button class="module-tab" data-module-key="safeguard" data-tilt>
           <div class="tab-meta">
             <span class="name">Elena Safeguard Protocol</span>
             <span class="role">Uncertainty & Abstention Gate</span>
@@ -393,7 +407,7 @@
       </div>
 
       <!-- Module Focus Card -->
-      <div class="council-card" id="moduleCard">
+      <div class="council-card" id="moduleCard" data-tilt>
         <div class="card-header">
           <div>
             <span class="node-badge" id="moduleCode">NODE-01 // NEURAL</span>
@@ -434,7 +448,7 @@
       </p>
     </div>
 
-    <div class="benchmark-table-container">
+    <div class="benchmark-table-container" data-tilt>
       <table class="benchmark-table">
         <thead>
           <tr>
@@ -510,7 +524,7 @@
       </p>
     </div>
 
-    <div class="code-preview-card">
+    <div class="code-preview-card" data-tilt>
       <div class="code-header">
         <div class="file-tab active">
           <span>backend/server.py (FastAPI REST Server)</span>

@@ -1,7 +1,7 @@
 /**
  * FIND THE AI — Multi-Engine Forensic Detection Engine & Research Observatory
  * Author: Yash Dhiraj Oza
- * Version: 2.2.0 (Un-Slopped, Dual-Mode Architecture: Live FastAPI or Client Simulation)
+ * Version: 2.3.0 (Interactive 3D Probability Surface & Neural Lattice Visualizer)
  */
 
 const API_BASE = "http://127.0.0.1:8000";
@@ -47,7 +47,7 @@ const FORENSIC_MODULES = {
   }
 };
 
-// 📚 BENCHMARK PRESETS (Authentic unlabelled corpora for testing)
+// 📚 BENCHMARK PRESETS
 const PRESETS = {
   chatgpt: `Artificial intelligence is rapidly transforming the modern technological landscape in unprecedented ways. Furthermore, organizations across diverse industries are leveraging machine learning algorithms to enhance operational efficiency and streamline decision-making processes. It is crucial to recognize that the integration of synthetic intelligence offers paramount benefits, fostering innovation and creating new paradigms for economic growth. In conclusion, as society navigates this evolving paradigm, establishing robust regulatory frameworks remains essential to ensure responsible stewardship.`,
 
@@ -62,14 +62,14 @@ const PRESETS = {
   short: `AI is changing the world fast. It helps people code and write faster.`
 };
 
-// Common abbreviations to protect during sentence segmentation
+// Protected abbreviations
 const ABBREVIATIONS = [
   "dr.", "mr.", "mrs.", "ms.", "prof.", "sr.", "jr.", "vs.", "etc.",
   "e.g.", "i.e.", "al.", "fig.", "eq.", "dept.", "est.", "approx.",
   "u.s.", "u.k.", "u.n.", "e.u.", "no.", "vol.", "pp."
 ];
 
-// AI stylistic & cliché markers
+// Cliché markers
 const AI_MARKERS = [
   "furthermore", "moreover", "in conclusion", "crucial", "paramount", "testament",
   "beacon", "landscape", "tapestry", "delve", "unprecedented", "realm", "pivotal",
@@ -79,6 +79,8 @@ const AI_MARKERS = [
 
 // 🚀 INITIALIZATION
 document.addEventListener("DOMContentLoaded", () => {
+  init3DEngine();
+  initTiltEffect();
   checkBackendHealth();
   setupModuleSelector();
   setupPresets();
@@ -91,7 +93,307 @@ document.addEventListener("DOMContentLoaded", () => {
   loadPreset("chatgpt");
 });
 
+// =========================================================================
+// 🧊 3D INTERACTIVE ENGINE (PROBABILITY LANDSCAPE & NEURAL LATTICE)
+// =========================================================================
+let sceneMode = "curvature"; // "curvature" | "lattice" | "polyhedron"
+let mouse3D = { x: 0, y: 0, targetX: 0, targetY: 0 };
+let isDragging3D = false;
+let lastMousePos = { x: 0, y: 0 };
+
+function init3DEngine() {
+  const canvas = document.getElementById("hero3dCanvas");
+  if (!canvas) return;
+
+  const ctx = canvas.getContext("2d");
+  let width, height;
+  let animId;
+  let time = 0;
+
+  function resize() {
+    width = canvas.parentElement.clientWidth;
+    height = canvas.parentElement.clientHeight;
+    canvas.width = width * window.devicePixelRatio;
+    canvas.height = height * window.devicePixelRatio;
+    ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+  }
+
+  window.addEventListener("resize", resize);
+  resize();
+
+  // Mouse & Touch Controls
+  canvas.addEventListener("mousemove", (e) => {
+    const rect = canvas.getBoundingClientRect();
+    const nx = ((e.clientX - rect.left) / width) * 2 - 1;
+    const ny = ((e.clientY - rect.top) / height) * 2 - 1;
+    mouse3D.targetX = nx * 0.8;
+    mouse3D.targetY = ny * 0.8;
+  });
+
+  canvas.addEventListener("mouseleave", () => {
+    mouse3D.targetX = 0;
+    mouse3D.targetY = 0;
+  });
+
+  // Scene Mode Buttons
+  const sceneBtns = document.querySelectorAll(".scene-btn");
+  sceneBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      sceneBtns.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      sceneMode = btn.getAttribute("data-scene-mode");
+    });
+  });
+
+  // 3D Projection Math
+  function project3D(x, y, z, rotX, rotY, fov = 350) {
+    // Rotate Y
+    const cosY = Math.cos(rotY);
+    const sinY = Math.sin(rotY);
+    const x1 = x * cosY + z * sinY;
+    const z1 = -x * sinY + z * cosY;
+
+    // Rotate X
+    const cosX = Math.cos(rotX);
+    const sinX = Math.sin(rotX);
+    const y2 = y * cosX - z1 * sinX;
+    const z2 = y * sinX + z1 * cosX + 450; // Camera distance
+
+    const scale = fov / (z2 + 1e-4);
+    const projX = x1 * scale + width / 2;
+    const projY = y2 * scale + height / 2;
+
+    return { x: projX, y: projY, scale, depth: z2 };
+  }
+
+  // --- RENDER 1: 3D PROBABILITY CURVATURE LANDSCAPE ---
+  function renderCurvature(rotX, rotY, t) {
+    const cols = 22;
+    const rows = 14;
+    const spacing = 32;
+    const startX = -((cols - 1) * spacing) / 2;
+    const startZ = -((rows - 1) * spacing) / 2;
+
+    const grid = [];
+
+    for (let r = 0; r < rows; r++) {
+      grid[r] = [];
+      for (let c = 0; c < cols; c++) {
+        const x = startX + c * spacing;
+        const z = startZ + r * spacing;
+        
+        // Probability Energy Wave formula
+        const dist = Math.sqrt(x * x + z * z);
+        const wave = Math.sin(dist * 0.035 - t * 1.5) * 25;
+        const energyPeak = Math.exp(-dist * 0.012) * 55;
+        const y = wave - energyPeak + 20;
+
+        grid[r][c] = project3D(x, y, z, rotX + 0.45, rotY, 380);
+      }
+    }
+
+    // Draw Grid Lines
+    ctx.lineWidth = 1;
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < cols; c++) {
+        const p = grid[r][c];
+
+        // Horizontal Line
+        if (c < cols - 1) {
+          const pRight = grid[r][c + 1];
+          const alpha = Math.max(0.1, Math.min(0.6, 1.0 - p.depth / 900));
+          ctx.strokeStyle = `rgba(79, 117, 255, ${alpha})`;
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(pRight.x, pRight.y);
+          ctx.stroke();
+        }
+
+        // Vertical Line
+        if (r < rows - 1) {
+          const pDown = grid[r + 1][c];
+          const alpha = Math.max(0.1, Math.min(0.6, 1.0 - p.depth / 900));
+          ctx.strokeStyle = `rgba(0, 200, 133, ${alpha * 0.8})`;
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(pDown.x, pDown.y);
+          ctx.stroke();
+        }
+
+        // Vertices
+        if ((r + c) % 3 === 0) {
+          ctx.fillStyle = `rgba(241, 245, 249, 0.7)`;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, Math.max(1, p.scale * 1.6), 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+    }
+  }
+
+  // --- RENDER 2: 3D NEURAL LATTICE ---
+  const latticeNodes = [];
+  for (let i = 0; i < 48; i++) {
+    latticeNodes.push({
+      x: (Math.random() - 0.5) * 440,
+      y: (Math.random() - 0.5) * 220,
+      z: (Math.random() - 0.5) * 380,
+      vx: (Math.random() - 0.5) * 0.4,
+      vy: (Math.random() - 0.5) * 0.4,
+      vz: (Math.random() - 0.5) * 0.4,
+      size: Math.random() * 2 + 1.5
+    });
+  }
+
+  function renderLattice(rotX, rotY) {
+    latticeNodes.forEach(node => {
+      node.x += node.vx;
+      node.y += node.vy;
+      node.z += node.vz;
+      if (Math.abs(node.x) > 220) node.vx *= -1;
+      if (Math.abs(node.y) > 110) node.vy *= -1;
+      if (Math.abs(node.z) > 190) node.vz *= -1;
+    });
+
+    const projected = latticeNodes.map(n => ({
+      ...project3D(n.x, n.y, n.z, rotX, rotY, 400),
+      raw: n
+    }));
+
+    // Connect close nodes
+    ctx.lineWidth = 1;
+    for (let i = 0; i < projected.length; i++) {
+      for (let j = i + 1; j < projected.length; j++) {
+        const p1 = projected[i];
+        const p2 = projected[j];
+        const dx = p1.raw.x - p2.raw.x;
+        const dy = p1.raw.y - p2.raw.y;
+        const dz = p1.raw.z - p2.raw.z;
+        const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
+
+        if (dist < 110) {
+          const alpha = (1.0 - dist / 110) * 0.45;
+          ctx.strokeStyle = `rgba(79, 117, 255, ${alpha})`;
+          ctx.beginPath();
+          ctx.moveTo(p1.x, p1.y);
+          ctx.lineTo(p2.x, p2.y);
+          ctx.stroke();
+        }
+      }
+
+      const p = projected[i];
+      ctx.fillStyle = `rgba(0, 200, 133, 0.85)`;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.scale * p.raw.size, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
+  // --- RENDER 3: 3D FORENSIC POLYHEDRON (OCTAHEDRON) ---
+  const polyVertices = [
+    { x: 0, y: -110, z: 0 },
+    { x: 0, y: 110, z: 0 },
+    { x: -110, y: 0, z: 0 },
+    { x: 110, y: 0, z: 0 },
+    { x: 0, y: 0, z: -110 },
+    { x: 0, y: 0, z: 110 }
+  ];
+
+  const polyEdges = [
+    [0, 2], [0, 3], [0, 4], [0, 5],
+    [1, 2], [1, 3], [1, 4], [1, 5],
+    [2, 4], [4, 3], [3, 5], [5, 2]
+  ];
+
+  function renderPolyhedron(rotX, rotY, t) {
+    const rX = rotX + t * 0.4;
+    const rY = rotY + t * 0.6;
+    const projected = polyVertices.map(v => project3D(v.x, v.y, v.z, rX, rY, 420));
+
+    // Outer bounding ring
+    ctx.strokeStyle = "rgba(79, 117, 255, 0.25)";
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.arc(width / 2, height / 2, 135, 0, Math.PI * 2);
+    ctx.stroke();
+
+    // Edges
+    polyEdges.forEach(([i, j]) => {
+      const p1 = projected[i];
+      const p2 = projected[j];
+      ctx.strokeStyle = "rgba(79, 117, 255, 0.7)";
+      ctx.beginPath();
+      ctx.moveTo(p1.x, p1.y);
+      ctx.lineTo(p2.x, p2.y);
+      ctx.stroke();
+    });
+
+    // Vertices
+    projected.forEach((p, idx) => {
+      ctx.fillStyle = idx % 2 === 0 ? "rgba(0, 200, 133, 0.9)" : "rgba(241, 245, 249, 0.9)";
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.scale * 3.5, 0, Math.PI * 2);
+      ctx.fill();
+    });
+  }
+
+  // Animation Loop
+  function loop() {
+    ctx.clearRect(0, 0, width, height);
+
+    // Smooth mouse interpolation
+    mouse3D.x += (mouse3D.targetX - mouse3D.x) * 0.08;
+    mouse3D.y += (mouse3D.targetY - mouse3D.y) * 0.08;
+
+    time += 0.015;
+
+    const rotX = mouse3D.y * 0.6;
+    const rotY = mouse3D.x * 0.8;
+
+    if (sceneMode === "curvature") {
+      renderCurvature(rotX, rotY, time);
+    } else if (sceneMode === "lattice") {
+      renderLattice(rotX, rotY);
+    } else if (sceneMode === "polyhedron") {
+      renderPolyhedron(rotX, rotY, time);
+    }
+
+    animId = requestAnimationFrame(loop);
+  }
+
+  loop();
+}
+
+// =========================================================================
+// 🎴 3D PERSPECTIVE CARD TILT EFFECT
+// =========================================================================
+function initTiltEffect() {
+  const cards = document.querySelectorAll("[data-tilt]");
+
+  cards.forEach(card => {
+    card.addEventListener("mousemove", (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+
+      const rotateX = ((y - centerY) / centerY) * -6; // max 6 deg
+      const rotateY = ((x - centerX) / centerX) * 6;
+
+      card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateZ(4px)`;
+    });
+
+    card.addEventListener("mouseleave", () => {
+      card.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0px)";
+    });
+  });
+}
+
+// =========================================================================
 // 🌐 BACKEND HEALTH & MODE CHECK
+// =========================================================================
 async function checkBackendHealth() {
   const badge = document.getElementById("backendStatusBadge");
   const modeText = document.getElementById("backendModeText");
@@ -194,19 +496,14 @@ function safeSplitSentences(text) {
   if (!text || !text.trim()) return [];
 
   let clean = text.trim().replace(/\s+/g, ' ');
-  // Protect decimals
   clean = clean.replace(/(\d+)\.(\d+)/g, '$1<DECIMAL>$2');
 
-  // Protect abbreviations
   ABBREVIATIONS.forEach(abbr => {
     const regex = new RegExp(`\\b${abbr.replace('.', '\\.')}`, 'gi');
     clean = clean.replace(regex, abbr.replace('.', '<DOT>'));
   });
 
-  // Protect ellipsis
   clean = clean.replace(/\.\.\./g, '<ELLIPSIS>');
-
-  // Split on punctuation followed by space and uppercase
   const raw = clean.split(/(?<=[.!?])\s+(?=[A-Z0-9"'\(\[])/);
 
   return raw.map(s => {
@@ -227,7 +524,7 @@ async function sha256(str) {
 }
 
 // =========================================================================
-// 🚀 FORENSIC SCAN ORCHESTRATOR (LIVE API OR CLIENT ENGINE)
+// 🚀 FORENSIC SCAN ORCHESTRATOR
 // =========================================================================
 async function executeForensicScan(text) {
   if (!text || !text.trim()) {
@@ -235,7 +532,6 @@ async function executeForensicScan(text) {
     return;
   }
 
-  // Check if live backend API is available
   if (backendOnline) {
     try {
       const res = await fetch(`${API_BASE}/api/analyze`, {
@@ -254,7 +550,7 @@ async function executeForensicScan(text) {
     }
   }
 
-  // Client-Side Calibrated Forensic Engine
+  // Client-Side Calibrated Engine
   const words = safeExtractWords(text);
   const sentences = safeSplitSentences(text);
   const textHash = await sha256(text);
@@ -265,7 +561,6 @@ async function executeForensicScan(text) {
     return;
   }
 
-  // 1. Stylometrics
   const sentLengths = sentences.map(s => safeExtractWords(s).length).filter(l => l > 0);
   const meanLen = sentLengths.length ? (sentLengths.reduce((a, b) => a + b, 0) / sentLengths.length) : words.length;
   const variance = sentLengths.length ? (sentLengths.reduce((sum, len) => sum + Math.pow(len - meanLen, 2), 0) / sentLengths.length) : 0;
@@ -281,7 +576,6 @@ async function executeForensicScan(text) {
   const scoreMarkers = Math.min(1.0, (markerHits / words.length) * 20.0);
   const styloScore = Math.max(5, Math.min(96, (0.45 * scoreBurst + 0.30 * scoreTTR + 0.25 * scoreMarkers) * 100));
 
-  // 2. Zero-Shot Curvature
   let simulatedPPL = 68.0;
   if (burstiness < 0.25) simulatedPPL -= 28.0;
   else if (burstiness > 0.55) simulatedPPL += 24.0;
@@ -290,16 +584,12 @@ async function executeForensicScan(text) {
   simulatedPPL = Math.max(14.0, Math.min(115.0, simulatedPPL));
 
   const curvatureScore = Math.max(4, Math.min(97, (1.0 / (1.0 + Math.exp((simulatedPPL - 42.0) / 9.0))) * 100));
-
-  // 3. Neural Classifier Proxy
   const neuralScore = Math.max(5, Math.min(97, 0.55 * curvatureScore + 0.45 * styloScore + (markerHits > 2 ? 6 : 0)));
 
-  // 4. Adversarial Resistance
   const isSynonym = (ttr > 0.65 && simulatedPPL < 40.0);
   const isJitter = (burstiness > 0.50 && markerHits > 2);
   const advScore = Math.max(5, Math.min(98, neuralScore * 0.6 + curvatureScore * 0.4 + (isSynonym || isJitter ? 14 : 0)));
 
-  // 5. Elena Safeguard / Abstention
   const isShort = words.length < 50;
   const engineScores = {
     neural: Math.round(neuralScore),
@@ -323,7 +613,6 @@ async function executeForensicScan(text) {
     0.20 * advScore
   );
 
-  // Sentence breakdown
   const sentenceResults = sentences.map((sent, idx) => {
     const sWords = safeExtractWords(sent);
     let sMarkers = 0;
@@ -458,8 +747,8 @@ function updateDashboardUI(data) {
       verdictText.style.color = "var(--color-ai)";
       confidenceBadge.textContent = `AI-Like (${data.safeguard.confidenceLevel} Confidence)`;
       confidenceBadge.style.color = "var(--color-ai)";
-      confidenceBadge.style.borderColor = "rgba(239, 68, 68, 0.4)";
-      confidenceBadge.style.background = "rgba(239, 68, 68, 0.12)";
+      confidenceBadge.style.borderColor = "rgba(244, 63, 94, 0.4)";
+      confidenceBadge.style.background = "rgba(244, 63, 94, 0.12)";
       verdictExp.textContent = "Text demonstrates uniform syntactic pacing, high token predictability, and low likelihood curvature drop.";
     } else if (data.consensusScore > 35) {
       gaugeCircle.style.stroke = "var(--color-mixed)";
@@ -489,11 +778,9 @@ function updateDashboardUI(data) {
     }
   }
 
-  // Inter-Engine Agreement Meter
   agreementVal.textContent = `${data.safeguard.agreementPct}% Agreement`;
   agreementBar.style.width = `${data.safeguard.agreementPct}%`;
 
-  // Engine Breakdown
   document.getElementById("scoreAurelia").textContent = `${data.engineScores.neural}%`;
   document.getElementById("barAurelia").style.width = `${data.engineScores.neural}%`;
 
@@ -506,7 +793,6 @@ function updateDashboardUI(data) {
   document.getElementById("scoreMarcus").textContent = `${data.engineScores.adversarial}%`;
   document.getElementById("barMarcus").style.width = `${data.engineScores.adversarial}%`;
 
-  // Mathematical Metrics
   document.getElementById("valPerplexity").textContent = `${data.metrics.perplexity}`;
   document.getElementById("barPerplexity").style.width = `${Math.min(100, (data.metrics.perplexity / 100) * 100)}%`;
 
@@ -519,7 +805,6 @@ function updateDashboardUI(data) {
   document.getElementById("valTop10").textContent = `${data.metrics.top10Pct}%`;
   document.getElementById("barTop10").style.width = `${data.metrics.top10Pct}%`;
 
-  // Render Visualizers
   renderHeatmap(data.sentences);
   renderGLTR(data.words, data.consensusScore || 50);
   renderReport(data);
@@ -612,9 +897,7 @@ function setupAttackLab() {
   runAttackBtn.addEventListener("click", async () => {
     if (!currentAuditData) return;
     const baseScore = currentAuditData.consensusScore || 50;
-    const resultsContainer = document.getElementById("attackResults");
 
-    // Check if backend is available for real attack test
     if (backendOnline) {
       try {
         const res = await fetch(`${API_BASE}/api/attack-test`, {
@@ -630,7 +913,6 @@ function setupAttackLab() {
       } catch (err) {}
     }
 
-    // Client-Side Simulated Attack Test
     const attacks = [
       {
         name: "1. Baseline (Unmodified)",
@@ -723,7 +1005,7 @@ function renderReport(data) {
 Session ID: ${data.caseId}
 Timestamp (UTC): ${data.timestamp}
 SHA-256 Hash: ${data.textHash}
-System: FIND THE AI Multi-Engine Consensus v2.2.0
+System: FIND THE AI Multi-Engine Consensus v2.3.0
 
 ---------------------------------------------------------
 1. EXECUTIVE VERDICT & SAFEGUARD PROFILE
