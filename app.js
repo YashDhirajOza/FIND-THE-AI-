@@ -1,51 +1,13 @@
 /**
- * FIND THE AI — Multi-Engine Forensic Detection Engine & Research Observatory
+ * OBSERVE — FIND THE AI Forensic Engine
+ * Design System: Observe Liquid Glass + Instrument Serif
  * Author: Yash Dhiraj Oza
- * Version: 2.3.0 (Interactive 3D Probability Surface & Neural Lattice Visualizer)
+ * Version: 2.4.0
  */
 
 const API_BASE = "http://127.0.0.1:8000";
 let backendOnline = false;
 let currentAuditData = null;
-
-// 🏛️ THE 5 FORENSIC METHODOLOGY MODULES
-const FORENSIC_MODULES = {
-  neural: {
-    id: "neural",
-    name: "Disentangled Attention Classifier",
-    code: "NODE-01 // NEURAL",
-    focus: "Contextual semantic continuity & positional dissonance",
-    description: "Evaluates sentence-to-sentence semantic transitions using contextual embeddings to detect synthetic structural patterns that persist across vocabulary swaps."
-  },
-  curvature: {
-    id: "curvature",
-    name: "Likelihood Curvature & Binoculars",
-    code: "NODE-02 // CURVATURE",
-    focus: "Cross-perplexity ratio (Observer vs Performer)",
-    description: "Contrasts likelihood distributions across paired language models. Synthetic text sits at sharp local probability peaks, exhibiting steep drops under perturbation."
-  },
-  stylometry: {
-    id: "stylometry",
-    name: "Information Density & Stylometrics",
-    code: "NODE-03 // STYLOMETRY",
-    focus: "Burstiness variance (σ/μ), Type-Token Ratio & clause depth",
-    description: "Measures syntactic pacing, vocabulary richness (TTR / Herdan's C), and standard deviation of clause lengths to identify unnatural rhythmic uniformity."
-  },
-  adversarial: {
-    id: "adversarial",
-    name: "Adversarial Robustness Tester",
-    code: "NODE-04 // ADVERSARIAL",
-    focus: "Paraphrase invariance & humanizer evasion detection",
-    description: "Quantifies detection resilience against deliberate evasion techniques including synonym substitution, punctuation jitter, and human-AI co-authoring."
-  },
-  safeguard: {
-    id: "safeguard",
-    name: "Uncertainty & Ethical Abstention Gate",
-    code: "NODE-05 // SAFEGUARD",
-    focus: "ESL bias prevention & minimum sample confidence floors",
-    description: "Enforces a mandatory 50-word sample limit and monitors inter-engine divergence, triggering an explicit Abstention verdict on uncertain inputs."
-  }
-};
 
 // 📚 BENCHMARK PRESETS
 const PRESETS = {
@@ -56,8 +18,6 @@ const PRESETS = {
   academic: `We evaluate the disentangled self-attention mechanism on downstream natural language understanding benchmarks. Specifically, the decomposition of token embeddings into distinct content and positional representations allows the transformer architecture to capture high-order syntactic dependencies with reduced parameterization. Empirical results demonstrate a statistically significant reduction in cross-entropy loss (p < 0.01) across multi-domain corpora.`,
 
   humanized: `Synthetic intellect is swiftly altering the modern digital horizon in novel manners. Additionally, enterprises across various sectors are employing automated algorithms to boost everyday efficiency and ease decision paths. It is vital to observe that the blend of artificial systems brings prime value, cultivating breakthroughs and unveiling fresh frameworks for commercial expansion.`,
-
-  hybrid: `I spent the entire weekend researching how modern language models generate text, and what I found was truly eye-opening. Artificial intelligence is transforming industries across the globe by enabling automated reasoning and streamlining workflow efficiency. However, whenever I try to explain this to my friends over dinner, they just laugh and tell me to get some sleep.`,
 
   short: `AI is changing the world fast. It helps people code and write faster.`
 };
@@ -79,14 +39,10 @@ const AI_MARKERS = [
 
 // 🚀 INITIALIZATION
 document.addEventListener("DOMContentLoaded", () => {
-  init3DEngine();
-  initTiltEffect();
   checkBackendHealth();
-  setupModuleSelector();
   setupPresets();
   setupSimulator();
   setupVisualizerTabs();
-  setupAttackLab();
   setupReportActions();
 
   // Load default preset
@@ -94,318 +50,17 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // =========================================================================
-// 🧊 3D INTERACTIVE ENGINE (PROBABILITY LANDSCAPE & NEURAL LATTICE)
-// =========================================================================
-let sceneMode = "curvature"; // "curvature" | "lattice" | "polyhedron"
-let mouse3D = { x: 0, y: 0, targetX: 0, targetY: 0 };
-let isDragging3D = false;
-let lastMousePos = { x: 0, y: 0 };
-
-function init3DEngine() {
-  const canvas = document.getElementById("hero3dCanvas");
-  if (!canvas) return;
-
-  const ctx = canvas.getContext("2d");
-  let width, height;
-  let animId;
-  let time = 0;
-
-  function resize() {
-    width = canvas.parentElement.clientWidth;
-    height = canvas.parentElement.clientHeight;
-    canvas.width = width * window.devicePixelRatio;
-    canvas.height = height * window.devicePixelRatio;
-    ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
-  }
-
-  window.addEventListener("resize", resize);
-  resize();
-
-  // Mouse & Touch Controls
-  canvas.addEventListener("mousemove", (e) => {
-    const rect = canvas.getBoundingClientRect();
-    const nx = ((e.clientX - rect.left) / width) * 2 - 1;
-    const ny = ((e.clientY - rect.top) / height) * 2 - 1;
-    mouse3D.targetX = nx * 0.8;
-    mouse3D.targetY = ny * 0.8;
-  });
-
-  canvas.addEventListener("mouseleave", () => {
-    mouse3D.targetX = 0;
-    mouse3D.targetY = 0;
-  });
-
-  // Scene Mode Buttons
-  const sceneBtns = document.querySelectorAll(".scene-btn");
-  sceneBtns.forEach(btn => {
-    btn.addEventListener("click", () => {
-      sceneBtns.forEach(b => b.classList.remove("active"));
-      btn.classList.add("active");
-      sceneMode = btn.getAttribute("data-scene-mode");
-    });
-  });
-
-  // 3D Projection Math
-  function project3D(x, y, z, rotX, rotY, fov = 350) {
-    // Rotate Y
-    const cosY = Math.cos(rotY);
-    const sinY = Math.sin(rotY);
-    const x1 = x * cosY + z * sinY;
-    const z1 = -x * sinY + z * cosY;
-
-    // Rotate X
-    const cosX = Math.cos(rotX);
-    const sinX = Math.sin(rotX);
-    const y2 = y * cosX - z1 * sinX;
-    const z2 = y * sinX + z1 * cosX + 450; // Camera distance
-
-    const scale = fov / (z2 + 1e-4);
-    const projX = x1 * scale + width / 2;
-    const projY = y2 * scale + height / 2;
-
-    return { x: projX, y: projY, scale, depth: z2 };
-  }
-
-  // --- RENDER 1: 3D PROBABILITY CURVATURE LANDSCAPE ---
-  function renderCurvature(rotX, rotY, t) {
-    const cols = 22;
-    const rows = 14;
-    const spacing = 32;
-    const startX = -((cols - 1) * spacing) / 2;
-    const startZ = -((rows - 1) * spacing) / 2;
-
-    const grid = [];
-
-    for (let r = 0; r < rows; r++) {
-      grid[r] = [];
-      for (let c = 0; c < cols; c++) {
-        const x = startX + c * spacing;
-        const z = startZ + r * spacing;
-        
-        // Probability Energy Wave formula
-        const dist = Math.sqrt(x * x + z * z);
-        const wave = Math.sin(dist * 0.035 - t * 1.5) * 25;
-        const energyPeak = Math.exp(-dist * 0.012) * 55;
-        const y = wave - energyPeak + 20;
-
-        grid[r][c] = project3D(x, y, z, rotX + 0.45, rotY, 380);
-      }
-    }
-
-    // Draw Grid Lines
-    ctx.lineWidth = 1;
-    for (let r = 0; r < rows; r++) {
-      for (let c = 0; c < cols; c++) {
-        const p = grid[r][c];
-
-        // Horizontal Line
-        if (c < cols - 1) {
-          const pRight = grid[r][c + 1];
-          const alpha = Math.max(0.1, Math.min(0.6, 1.0 - p.depth / 900));
-          ctx.strokeStyle = `rgba(79, 117, 255, ${alpha})`;
-          ctx.beginPath();
-          ctx.moveTo(p.x, p.y);
-          ctx.lineTo(pRight.x, pRight.y);
-          ctx.stroke();
-        }
-
-        // Vertical Line
-        if (r < rows - 1) {
-          const pDown = grid[r + 1][c];
-          const alpha = Math.max(0.1, Math.min(0.6, 1.0 - p.depth / 900));
-          ctx.strokeStyle = `rgba(0, 200, 133, ${alpha * 0.8})`;
-          ctx.beginPath();
-          ctx.moveTo(p.x, p.y);
-          ctx.lineTo(pDown.x, pDown.y);
-          ctx.stroke();
-        }
-
-        // Vertices
-        if ((r + c) % 3 === 0) {
-          ctx.fillStyle = `rgba(241, 245, 249, 0.7)`;
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, Math.max(1, p.scale * 1.6), 0, Math.PI * 2);
-          ctx.fill();
-        }
-      }
-    }
-  }
-
-  // --- RENDER 2: 3D NEURAL LATTICE ---
-  const latticeNodes = [];
-  for (let i = 0; i < 48; i++) {
-    latticeNodes.push({
-      x: (Math.random() - 0.5) * 440,
-      y: (Math.random() - 0.5) * 220,
-      z: (Math.random() - 0.5) * 380,
-      vx: (Math.random() - 0.5) * 0.4,
-      vy: (Math.random() - 0.5) * 0.4,
-      vz: (Math.random() - 0.5) * 0.4,
-      size: Math.random() * 2 + 1.5
-    });
-  }
-
-  function renderLattice(rotX, rotY) {
-    latticeNodes.forEach(node => {
-      node.x += node.vx;
-      node.y += node.vy;
-      node.z += node.vz;
-      if (Math.abs(node.x) > 220) node.vx *= -1;
-      if (Math.abs(node.y) > 110) node.vy *= -1;
-      if (Math.abs(node.z) > 190) node.vz *= -1;
-    });
-
-    const projected = latticeNodes.map(n => ({
-      ...project3D(n.x, n.y, n.z, rotX, rotY, 400),
-      raw: n
-    }));
-
-    // Connect close nodes
-    ctx.lineWidth = 1;
-    for (let i = 0; i < projected.length; i++) {
-      for (let j = i + 1; j < projected.length; j++) {
-        const p1 = projected[i];
-        const p2 = projected[j];
-        const dx = p1.raw.x - p2.raw.x;
-        const dy = p1.raw.y - p2.raw.y;
-        const dz = p1.raw.z - p2.raw.z;
-        const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
-
-        if (dist < 110) {
-          const alpha = (1.0 - dist / 110) * 0.45;
-          ctx.strokeStyle = `rgba(79, 117, 255, ${alpha})`;
-          ctx.beginPath();
-          ctx.moveTo(p1.x, p1.y);
-          ctx.lineTo(p2.x, p2.y);
-          ctx.stroke();
-        }
-      }
-
-      const p = projected[i];
-      ctx.fillStyle = `rgba(0, 200, 133, 0.85)`;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.scale * p.raw.size, 0, Math.PI * 2);
-      ctx.fill();
-    }
-  }
-
-  // --- RENDER 3: 3D FORENSIC POLYHEDRON (OCTAHEDRON) ---
-  const polyVertices = [
-    { x: 0, y: -110, z: 0 },
-    { x: 0, y: 110, z: 0 },
-    { x: -110, y: 0, z: 0 },
-    { x: 110, y: 0, z: 0 },
-    { x: 0, y: 0, z: -110 },
-    { x: 0, y: 0, z: 110 }
-  ];
-
-  const polyEdges = [
-    [0, 2], [0, 3], [0, 4], [0, 5],
-    [1, 2], [1, 3], [1, 4], [1, 5],
-    [2, 4], [4, 3], [3, 5], [5, 2]
-  ];
-
-  function renderPolyhedron(rotX, rotY, t) {
-    const rX = rotX + t * 0.4;
-    const rY = rotY + t * 0.6;
-    const projected = polyVertices.map(v => project3D(v.x, v.y, v.z, rX, rY, 420));
-
-    // Outer bounding ring
-    ctx.strokeStyle = "rgba(79, 117, 255, 0.25)";
-    ctx.lineWidth = 1;
-    ctx.beginPath();
-    ctx.arc(width / 2, height / 2, 135, 0, Math.PI * 2);
-    ctx.stroke();
-
-    // Edges
-    polyEdges.forEach(([i, j]) => {
-      const p1 = projected[i];
-      const p2 = projected[j];
-      ctx.strokeStyle = "rgba(79, 117, 255, 0.7)";
-      ctx.beginPath();
-      ctx.moveTo(p1.x, p1.y);
-      ctx.lineTo(p2.x, p2.y);
-      ctx.stroke();
-    });
-
-    // Vertices
-    projected.forEach((p, idx) => {
-      ctx.fillStyle = idx % 2 === 0 ? "rgba(0, 200, 133, 0.9)" : "rgba(241, 245, 249, 0.9)";
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.scale * 3.5, 0, Math.PI * 2);
-      ctx.fill();
-    });
-  }
-
-  // Animation Loop
-  function loop() {
-    ctx.clearRect(0, 0, width, height);
-
-    // Smooth mouse interpolation
-    mouse3D.x += (mouse3D.targetX - mouse3D.x) * 0.08;
-    mouse3D.y += (mouse3D.targetY - mouse3D.y) * 0.08;
-
-    time += 0.015;
-
-    const rotX = mouse3D.y * 0.6;
-    const rotY = mouse3D.x * 0.8;
-
-    if (sceneMode === "curvature") {
-      renderCurvature(rotX, rotY, time);
-    } else if (sceneMode === "lattice") {
-      renderLattice(rotX, rotY);
-    } else if (sceneMode === "polyhedron") {
-      renderPolyhedron(rotX, rotY, time);
-    }
-
-    animId = requestAnimationFrame(loop);
-  }
-
-  loop();
-}
-
-// =========================================================================
-// 🎴 3D PERSPECTIVE CARD TILT EFFECT
-// =========================================================================
-function initTiltEffect() {
-  const cards = document.querySelectorAll("[data-tilt]");
-
-  cards.forEach(card => {
-    card.addEventListener("mousemove", (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-
-      const rotateX = ((y - centerY) / centerY) * -6; // max 6 deg
-      const rotateY = ((x - centerX) / centerX) * 6;
-
-      card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateZ(4px)`;
-    });
-
-    card.addEventListener("mouseleave", () => {
-      card.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0px)";
-    });
-  });
-}
-
-// =========================================================================
-// 🌐 BACKEND HEALTH & MODE CHECK
+// 🌐 BACKEND HEALTH CHECK
 // =========================================================================
 async function checkBackendHealth() {
   const badge = document.getElementById("backendStatusBadge");
-  const modeText = document.getElementById("backendModeText");
-
   try {
     const res = await fetch(`${API_BASE}/api/health`, { signal: AbortSignal.timeout(2000) });
     if (res.ok) {
       const data = await res.json();
       backendOnline = true;
       badge.className = "backend-badge online";
-      badge.textContent = `Python Backend: Active (${data.device.toUpperCase()})`;
-      modeText.textContent = "Mode: Live PyTorch Inference Engine";
+      badge.textContent = `PyTorch Engine: Active (${data.device.toUpperCase()})`;
       return;
     }
   } catch (err) {
@@ -413,36 +68,12 @@ async function checkBackendHealth() {
   }
 
   badge.className = "backend-badge fallback";
-  badge.textContent = "Client Simulation Mode";
-  modeText.textContent = "Mode: Client-Side Calibration (Start backend/server.py for live PyTorch)";
-}
-
-// 🏛️ SETUP FORENSIC MODULE SELECTOR
-function setupModuleSelector() {
-  const tabs = document.querySelectorAll(".module-tab");
-  tabs.forEach(tab => {
-    tab.addEventListener("click", () => {
-      tabs.forEach(t => t.classList.remove("active"));
-      tab.classList.add("active");
-      const key = tab.getAttribute("data-module-key");
-      renderModuleProfile(key);
-    });
-  });
-}
-
-function renderModuleProfile(key) {
-  const m = FORENSIC_MODULES[key];
-  if (!m) return;
-
-  document.getElementById("moduleCode").textContent = m.code;
-  document.getElementById("moduleName").textContent = m.name;
-  document.getElementById("moduleDescription").textContent = m.description;
-  document.getElementById("moduleFocus").textContent = m.focus;
+  badge.textContent = "Simulation Mode";
 }
 
 // 📚 SETUP PRESETS
 function setupPresets() {
-  const buttons = document.querySelectorAll(".preset-btn");
+  const buttons = document.querySelectorAll(".preset-pill[data-preset]");
   buttons.forEach(btn => {
     btn.addEventListener("click", () => {
       buttons.forEach(b => b.classList.remove("active"));
@@ -456,7 +87,9 @@ function setupPresets() {
 function loadPreset(key) {
   const text = PRESETS[key] || "";
   const input = document.getElementById("textInput");
-  input.value = text;
+  const quickInput = document.getElementById("quickInput");
+  if (input) input.value = text;
+  if (quickInput) quickInput.value = text.substring(0, 80) + (text.length > 80 ? "..." : "");
   updateTextStats(text);
   executeForensicScan(text);
 }
@@ -464,29 +97,56 @@ function loadPreset(key) {
 // 🔬 SETUP SIMULATOR
 function setupSimulator() {
   const textInput = document.getElementById("textInput");
+  const quickInput = document.getElementById("quickInput");
+  const quickAnalyzeBtn = document.getElementById("quickAnalyzeBtn");
   const analyzeBtn = document.getElementById("analyzeBtn");
   const clearBtn = document.getElementById("clearBtn");
+  const quickDossierBtn = document.getElementById("quickDossierBtn");
 
-  textInput.addEventListener("input", (e) => {
-    updateTextStats(e.target.value);
-  });
+  if (textInput) {
+    textInput.addEventListener("input", (e) => {
+      updateTextStats(e.target.value);
+    });
+  }
 
-  analyzeBtn.addEventListener("click", () => {
-    executeForensicScan(textInput.value);
-  });
+  if (analyzeBtn) {
+    analyzeBtn.addEventListener("click", () => {
+      executeForensicScan(textInput.value);
+    });
+  }
 
-  clearBtn.addEventListener("click", () => {
-    textInput.value = "";
-    updateTextStats("");
-    resetResults();
-  });
+  if (quickAnalyzeBtn) {
+    quickAnalyzeBtn.addEventListener("click", () => {
+      const text = quickInput.value.length > 30 ? quickInput.value : textInput.value;
+      if (textInput) textInput.value = text;
+      executeForensicScan(text);
+      // Smooth scroll to workbench
+      document.getElementById("workbench")?.scrollIntoView({ behavior: "smooth" });
+    });
+  }
+
+  if (quickDossierBtn) {
+    quickDossierBtn.addEventListener("click", () => {
+      document.getElementById("view-report")?.scrollIntoView({ behavior: "smooth" });
+      const reportTab = document.querySelector('[data-view="report"]');
+      if (reportTab) reportTab.click();
+    });
+  }
+
+  if (clearBtn) {
+    clearBtn.addEventListener("click", () => {
+      if (textInput) textInput.value = "";
+      if (quickInput) quickInput.value = "";
+      updateTextStats("");
+      resetResults();
+    });
+  }
 }
 
 function updateTextStats(text) {
   const words = text.trim().length > 0 ? text.trim().split(/\s+/).length : 0;
-  const chars = text.length;
-  document.getElementById("wordCount").textContent = `${words} words`;
-  document.getElementById("charCount").textContent = `${chars} chars`;
+  const wordEl = document.getElementById("wordCount");
+  if (wordEl) wordEl.textContent = `${words} words`;
 }
 
 // =========================================================================
@@ -707,79 +367,43 @@ function updateDashboardUI(data) {
   const verdictExp = document.getElementById("verdictExplanation");
   const confidenceBadge = document.getElementById("confidenceBadge");
   const marginBadge = document.getElementById("marginBadge");
-  const agreementBar = document.getElementById("agreementBar");
-  const agreementVal = document.getElementById("agreementVal");
-  const consensusAlert = document.getElementById("consensusAlert");
 
   document.getElementById("caseIdText").textContent = data.caseId;
-  document.getElementById("textHashText").textContent = `${data.textHash.substring(0, 16)}...`;
+  document.getElementById("textHashText").textContent = `${data.textHash.substring(0, 12)}...`;
 
   const circumference = 427;
 
-  // ABSTENTION
   if (data.safeguard.shouldAbstain) {
-    scoreEl.textContent = "N/A";
+    if (scoreEl) scoreEl.textContent = "N/A";
     gaugeCircle.style.strokeDashoffset = circumference;
-    gaugeCircle.style.stroke = "var(--text-muted)";
+    gaugeCircle.style.stroke = "rgba(255, 255, 255, 0.2)";
 
     verdictText.textContent = "INSUFFICIENT EVIDENCE (Abstained)";
-    verdictText.style.color = "var(--text-muted)";
-    confidenceBadge.textContent = "Confidence: ZERO (Abstained)";
-    confidenceBadge.style.color = "var(--text-muted)";
-    confidenceBadge.style.borderColor = "var(--border-color)";
-    confidenceBadge.style.background = "rgba(255, 255, 255, 0.05)";
-
+    confidenceBadge.textContent = "Abstained";
     marginBadge.textContent = "Margin: Undetermined";
-    verdictExp.textContent = `The Safeguard Protocol refused to issue an AI probability verdict: ${data.safeguard.abstentionReason}`;
-    consensusAlert.style.display = "block";
-    consensusAlert.textContent = `Safeguard Active: ${data.safeguard.abstentionReason}`;
+    verdictExp.textContent = `The Safeguard Protocol refused to issue a score: ${data.safeguard.abstentionReason}`;
   } else {
-    // ACTIVE VERDICT
-    scoreEl.textContent = `${data.consensusScore}%`;
+    if (scoreEl) scoreEl.textContent = `${data.consensusScore}%`;
     const offset = circumference - (data.consensusScore / 100) * circumference;
     gaugeCircle.style.strokeDashoffset = offset;
+    gaugeCircle.style.stroke = "#ffffff";
 
     marginBadge.textContent = `Margin: ±${data.safeguard.marginOfError}% (${data.safeguard.confidenceLevel} Confidence)`;
 
     if (data.consensusScore > 65) {
-      gaugeCircle.style.stroke = "var(--color-ai)";
       verdictText.textContent = "Strong Synthetic Evidence";
-      verdictText.style.color = "var(--color-ai)";
-      confidenceBadge.textContent = `AI-Like (${data.safeguard.confidenceLevel} Confidence)`;
-      confidenceBadge.style.color = "var(--color-ai)";
-      confidenceBadge.style.borderColor = "rgba(244, 63, 94, 0.4)";
-      confidenceBadge.style.background = "rgba(244, 63, 94, 0.12)";
+      confidenceBadge.textContent = `AI-Like (${data.consensusScore}%)`;
       verdictExp.textContent = "Text demonstrates uniform syntactic pacing, high token predictability, and low likelihood curvature drop.";
     } else if (data.consensusScore > 35) {
-      gaugeCircle.style.stroke = "var(--color-mixed)";
       verdictText.textContent = "Mixed / Hybrid Authorship";
-      verdictText.style.color = "var(--color-mixed)";
-      confidenceBadge.textContent = `Hybrid (${data.safeguard.confidenceLevel} Confidence)`;
-      confidenceBadge.style.color = "var(--color-mixed)";
-      confidenceBadge.style.borderColor = "rgba(245, 158, 11, 0.4)";
-      confidenceBadge.style.background = "rgba(245, 158, 11, 0.12)";
+      confidenceBadge.textContent = `Hybrid (${data.consensusScore}%)`;
       verdictExp.textContent = "Text exhibits mixed signals: organic human spans interspersed with predictable synthetic structure.";
     } else {
-      gaugeCircle.style.stroke = "var(--color-human)";
       verdictText.textContent = "Likely Organic Human";
-      verdictText.style.color = "var(--color-human)";
-      confidenceBadge.textContent = `Human (${data.safeguard.confidenceLevel} Confidence)`;
-      confidenceBadge.style.color = "var(--color-human)";
-      confidenceBadge.style.borderColor = "rgba(0, 200, 133, 0.4)";
-      confidenceBadge.style.background = "rgba(0, 200, 133, 0.12)";
+      confidenceBadge.textContent = `Human (${data.consensusScore}%)`;
       verdictExp.textContent = "High burstiness coefficient, high lexical diversity, and organic syntactic clause depth detected.";
     }
-
-    if (data.safeguard.agreementPct < 60) {
-      consensusAlert.style.display = "block";
-      consensusAlert.textContent = `Engine Divergence: Forensic engines show moderate disagreement (Agreement: ${data.safeguard.agreementPct}%). Score represents weighted consensus.`;
-    } else {
-      consensusAlert.style.display = "none";
-    }
   }
-
-  agreementVal.textContent = `${data.safeguard.agreementPct}% Agreement`;
-  agreementBar.style.width = `${data.safeguard.agreementPct}%`;
 
   document.getElementById("scoreAurelia").textContent = `${data.engineScores.neural}%`;
   document.getElementById("barAurelia").style.width = `${data.engineScores.neural}%`;
@@ -793,18 +417,6 @@ function updateDashboardUI(data) {
   document.getElementById("scoreMarcus").textContent = `${data.engineScores.adversarial}%`;
   document.getElementById("barMarcus").style.width = `${data.engineScores.adversarial}%`;
 
-  document.getElementById("valPerplexity").textContent = `${data.metrics.perplexity}`;
-  document.getElementById("barPerplexity").style.width = `${Math.min(100, (data.metrics.perplexity / 100) * 100)}%`;
-
-  document.getElementById("valBurstiness").textContent = `${data.metrics.burstiness}`;
-  document.getElementById("barBurstiness").style.width = `${Math.min(100, data.metrics.burstiness * 120)}%`;
-
-  document.getElementById("valTTR").textContent = `${data.metrics.ttr}`;
-  document.getElementById("barTTR").style.width = `${data.metrics.ttr * 100}%`;
-
-  document.getElementById("valTop10").textContent = `${data.metrics.top10Pct}%`;
-  document.getElementById("barTop10").style.width = `${data.metrics.top10Pct}%`;
-
   renderHeatmap(data.sentences);
   renderGLTR(data.words, data.consensusScore || 50);
   renderReport(data);
@@ -813,187 +425,46 @@ function updateDashboardUI(data) {
 // 🟩 RENDER HEATMAP
 function renderHeatmap(sentences) {
   const container = document.getElementById("heatmapContainer");
+  if (!container) return;
   container.innerHTML = "";
 
   sentences.forEach(s => {
     const span = document.createElement("span");
     span.className = `heat-sent sent-${s.label}`;
     span.textContent = s.text + " ";
-    span.setAttribute("title", `Click to inspect: ${s.score}% AI`);
-
-    span.addEventListener("click", () => {
-      inspectSentence(s);
-    });
-
+    span.setAttribute("title", `Sentence AI Probability: ${s.score}%`);
     container.appendChild(span);
   });
-}
-
-function inspectSentence(s) {
-  const inspector = document.getElementById("sentenceInspector");
-  const textEl = document.getElementById("inspectedSentenceText");
-  const statsEl = document.getElementById("inspectedSentenceStats");
-
-  inspector.classList.add("active");
-  textEl.textContent = `"${s.text}"`;
-
-  let verdictColor = s.label === "ai" ? "var(--color-ai)" : s.label === "mixed" ? "var(--color-mixed)" : "var(--color-human)";
-
-  statsEl.innerHTML = `
-    <div class="detail-box">
-      <span class="detail-label">Sentence AI Evidence</span>
-      <span class="detail-value" style="color: ${verdictColor}">${s.score}%</span>
-    </div>
-    <div class="detail-box">
-      <span class="detail-label">Word Count</span>
-      <span class="detail-value">${s.word_count || s.words} words</span>
-    </div>
-    <div class="detail-box">
-      <span class="detail-label">Marker Count</span>
-      <span class="detail-value">${s.marker_count || s.markers || 0} detected</span>
-    </div>
-  `;
 }
 
 // 🟨 RENDER GLTR
 function renderGLTR(words, overallScore) {
   const container = document.getElementById("gltrContainer");
+  if (!container) return;
   container.innerHTML = "";
 
   words.forEach((w) => {
     const span = document.createElement("span");
-    span.className = "gltr-word";
+    span.className = "inline-block mr-1 px-1 rounded text-xs";
     span.textContent = w;
 
     const lower = w.toLowerCase();
     const isStopWord = ["the", "is", "at", "which", "on", "and", "a", "an", "in", "to", "of", "it", "for", "as"].includes(lower);
-    const isMarker = AI_MARKERS.includes(lower);
     const rand = Math.random();
 
     if (overallScore > 65) {
-      if (isStopWord || isMarker || rand < 0.70) span.classList.add("r-top10");
-      else if (rand < 0.88) span.classList.add("r-top100");
-      else if (rand < 0.96) span.classList.add("r-top1000");
-      else span.classList.add("r-out");
+      if (isStopWord || rand < 0.70) span.classList.add("bg-emerald-500/20", "text-emerald-300");
+      else if (rand < 0.88) span.classList.add("bg-amber-500/20", "text-amber-300");
+      else span.classList.add("bg-rose-500/20", "text-rose-300");
     } else {
-      if (isStopWord) span.classList.add("r-top10");
-      else if (rand < 0.35) span.classList.add("r-top10");
-      else if (rand < 0.65) span.classList.add("r-top100");
-      else if (rand < 0.85) span.classList.add("r-top1000");
-      else span.classList.add("r-out");
+      if (isStopWord) span.classList.add("bg-emerald-500/20", "text-emerald-300");
+      else if (rand < 0.35) span.classList.add("bg-emerald-500/20", "text-emerald-300");
+      else if (rand < 0.65) span.classList.add("bg-amber-500/20", "text-amber-300");
+      else span.classList.add("bg-purple-500/20", "text-purple-300");
     }
 
     container.appendChild(span);
   });
-}
-
-// =========================================================================
-// ⚔️ ADVERSARIAL STRESS TEST
-// =========================================================================
-function setupAttackLab() {
-  const runAttackBtn = document.getElementById("runAttackBtn");
-  if (!runAttackBtn) return;
-
-  runAttackBtn.addEventListener("click", async () => {
-    if (!currentAuditData) return;
-    const baseScore = currentAuditData.consensusScore || 50;
-
-    if (backendOnline) {
-      try {
-        const res = await fetch(`${API_BASE}/api/attack-test`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ text: currentAuditData.rawText })
-        });
-        if (res.ok) {
-          const data = await res.json();
-          renderAttackResults(data.attacks, data.robustness_index);
-          return;
-        }
-      } catch (err) {}
-    }
-
-    const attacks = [
-      {
-        name: "1. Baseline (Unmodified)",
-        technique: "Original suspect text buffer",
-        before: baseScore,
-        after: baseScore,
-        retainedRate: 100,
-        status: "Control Baseline"
-      },
-      {
-        name: "2. Synonym Replacement (QuillBot)",
-        technique: "Swapping 25% of lexical tokens with rare synonyms",
-        before: baseScore,
-        after: Math.round(baseScore * 0.86),
-        retainedRate: 86,
-        status: "Mitigated by DeBERTa Semantic Invariance"
-      },
-      {
-        name: "3. Burstiness Jitter (StealthWriter)",
-        technique: "Splitting compound clauses to manipulate variance",
-        before: baseScore,
-        after: Math.round(baseScore * 0.79),
-        retainedRate: 79,
-        status: "Caught by Curvature Energy Drop"
-      },
-      {
-        name: "4. Human Co-Authoring (50% Rewrite)",
-        technique: "Interspersing organic conversational clauses",
-        before: baseScore,
-        after: Math.round(baseScore * 0.64),
-        retainedRate: 64,
-        status: "Isolated by Sentence Heatmap"
-      }
-    ];
-
-    const avgRetention = Math.round(attacks.slice(1).reduce((sum, a) => sum + a.retainedRate, 0) / 3);
-    renderAttackResults(attacks, avgRetention);
-  });
-}
-
-function renderAttackResults(attacks, avgRetention) {
-  const container = document.getElementById("attackResults");
-  container.innerHTML = `
-    <div class="attack-summary-box">
-      <div class="attack-stat">
-        <span class="a-label">Adversarial Robustness Index</span>
-        <span class="a-val">${avgRetention}/100</span>
-      </div>
-      <div class="attack-stat">
-        <span class="a-label">Max Degradation Vulnerability</span>
-        <span class="a-val" style="color: var(--color-mixed)">-${100 - (attacks[3].retained_pct || attacks[3].retainedRate)}%</span>
-      </div>
-      <div class="attack-stat">
-        <span class="a-label">Primary Resilient Engine</span>
-        <span class="a-val" style="color: var(--accent-blue)">DeBERTa Attention</span>
-      </div>
-    </div>
-
-    <table class="attack-table">
-      <thead>
-        <tr>
-          <th>Attack Vector</th>
-          <th>Perturbation Technique</th>
-          <th>Baseline Score</th>
-          <th>Post-Attack Score</th>
-          <th>Robustness Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        ${attacks.map(a => `
-          <tr>
-            <td><strong>${a.name}</strong></td>
-            <td><small>${a.technique}</small></td>
-            <td><code>${a.score_before || a.before}%</code></td>
-            <td><code style="color: ${(a.score_after || a.after) > 50 ? 'var(--color-ai)' : 'var(--color-human)'}">${a.score_after || a.after}%</code></td>
-            <td><span class="status-pill">${a.status}</span></td>
-          </tr>
-        `).join("")}
-      </tbody>
-    </table>
-  `;
 }
 
 // 📋 RENDER DOSSIER
@@ -1001,61 +472,43 @@ function renderReport(data) {
   const pre = document.getElementById("reportPre");
   if (!pre) return;
 
-  const report = `# FIND-THE-AI FORENSIC DOSSIER
+  const report = `# OBSERVE — FIND-THE-AI FORENSIC DOSSIER
 Session ID: ${data.caseId}
 Timestamp (UTC): ${data.timestamp}
 SHA-256 Hash: ${data.textHash}
-System: FIND THE AI Multi-Engine Consensus v2.3.0
 
 ---------------------------------------------------------
-1. EXECUTIVE VERDICT & SAFEGUARD PROFILE
+1. EXECUTIVE VERDICT
 ---------------------------------------------------------
-Overall AI Likelihood: ${data.safeguard.shouldAbstain ? "ABSTAINED (Insufficient Evidence)" : data.consensusScore + "%"}
-Confidence Band: ${data.safeguard.confidenceLevel} (Margin: ±${data.safeguard.marginOfError}%)
+Overall AI Likelihood: ${data.safeguard.shouldAbstain ? "ABSTAINED" : data.consensusScore + "%"}
+Confidence Level: ${data.safeguard.confidenceLevel} (Margin: ±${data.safeguard.marginOfError}%)
 Inter-Engine Agreement: ${data.safeguard.agreementPct}%
-Safeguard Status: ${data.safeguard.shouldAbstain ? "ABSTAINED: " + data.safeguard.abstentionReason : "PASSED"}
 
 ---------------------------------------------------------
-2. INTER-ENGINE EVIDENCE BREAKDOWN
+2. 5-NODE EVIDENCE BREAKDOWN
 ---------------------------------------------------------
-- Neural Disentangled Attention: ${data.engineScores.neural}%
-- Zero-Shot Likelihood Curvature: ${data.engineScores.curvature}%
-- Stylometric Information Density: ${data.engineScores.stylometry}%
-- Adversarial Evasion Resistance: ${data.engineScores.adversarial}%
+- Neural Attention: ${data.engineScores.neural}%
+- Likelihood Curvature: ${data.engineScores.curvature}%
+- Stylometric Variance: ${data.engineScores.stylometry}%
+- Adversarial Defense: ${data.engineScores.adversarial}%
 
 ---------------------------------------------------------
-3. FORENSIC METRICS SUMMARY
+3. SENTENCE BREAKDOWN
 ---------------------------------------------------------
-- Perplexity Estimate: ${data.metrics.perplexity}
-- Burstiness Variance (σ/μ): ${data.metrics.burstiness}
-- Lexical Diversity (TTR): ${data.metrics.ttr}
-- Top-10 Token Saturation: ${data.metrics.top10Pct}%
-- Word Count: ${data.wordCount} | Sentence Count: ${data.sentenceCount}
-
----------------------------------------------------------
-4. SENTENCE BREAKDOWN
----------------------------------------------------------
-${data.sentences.map(s => `[Sent #${s.index} | AI ${s.score}% | ${s.label.toUpperCase()}] "${s.text}"`).join("\n")}
+${data.sentences.map(s => `[#${s.index} | AI ${s.score}% | ${s.label.toUpperCase()}] "${s.text}"`).join("\n")}
 `;
 
   pre.textContent = report;
 }
 
 function resetResults() {
-  document.getElementById("scoreValue").textContent = "--";
+  const scoreEl = document.getElementById("scoreValue");
+  if (scoreEl) scoreEl.textContent = "--";
   document.getElementById("gaugeCircle").style.strokeDashoffset = 427;
   document.getElementById("verdictText").textContent = "Awaiting Input";
-  document.getElementById("verdictExplanation").textContent = "Paste or select a test sample above to execute the 5-node forensic pipeline.";
-  document.getElementById("valPerplexity").textContent = "--";
-  document.getElementById("valBurstiness").textContent = "--";
-  document.getElementById("valTTR").textContent = "--";
-  document.getElementById("valTop10").textContent = "--";
-  document.getElementById("barPerplexity").style.width = "0%";
-  document.getElementById("barBurstiness").style.width = "0%";
-  document.getElementById("barTTR").style.width = "0%";
-  document.getElementById("barTop10").style.width = "0%";
-  document.getElementById("heatmapContainer").innerHTML = "<p style='color: var(--text-muted)'>No text analyzed yet.</p>";
-  document.getElementById("gltrContainer").innerHTML = "<p style='color: var(--text-muted)'>No tokens analyzed yet.</p>";
+  document.getElementById("verdictExplanation").textContent = "Paste or select a test sample above to inspect forensic evidence.";
+  document.getElementById("heatmapContainer").innerHTML = "<p class='text-white/40'>No text analyzed yet.</p>";
+  document.getElementById("gltrContainer").innerHTML = "<p class='text-white/40'>No tokens analyzed yet.</p>";
   document.getElementById("reportPre").textContent = "Awaiting text buffer...";
 }
 
@@ -1063,7 +516,6 @@ function resetResults() {
 function setupVisualizerTabs() {
   const tabs = document.querySelectorAll(".view-tab");
   const contents = document.querySelectorAll(".view-content");
-  const closeInspector = document.getElementById("closeInspector");
 
   tabs.forEach(tab => {
     tab.addEventListener("click", () => {
@@ -1076,12 +528,6 @@ function setupVisualizerTabs() {
       if (target) target.classList.add("active");
     });
   });
-
-  if (closeInspector) {
-    closeInspector.addEventListener("click", () => {
-      document.getElementById("sentenceInspector").classList.remove("active");
-    });
-  }
 }
 
 function setupReportActions() {
@@ -1092,8 +538,8 @@ function setupReportActions() {
     copyBtn.addEventListener("click", () => {
       if (currentAuditData) {
         navigator.clipboard.writeText(document.getElementById("reportPre").textContent);
-        copyBtn.textContent = "Copied Dossier!";
-        setTimeout(() => { copyBtn.textContent = "Copy Forensic Dossier"; }, 2000);
+        copyBtn.textContent = "Copied!";
+        setTimeout(() => { copyBtn.textContent = "Copy Markdown"; }, 2000);
       }
     });
   }
@@ -1104,7 +550,7 @@ function setupReportActions() {
         const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(currentAuditData, null, 2));
         const dlAnchor = document.createElement('a');
         dlAnchor.setAttribute("href", dataStr);
-        dlAnchor.setAttribute("download", `find_the_ai_audit_${currentAuditData.caseId}.json`);
+        dlAnchor.setAttribute("download", `observe_forensic_${currentAuditData.caseId}.json`);
         document.body.appendChild(dlAnchor);
         dlAnchor.click();
         dlAnchor.remove();

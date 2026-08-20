@@ -3,565 +3,310 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FIND THE AI — Multi-Engine Forensic Detection & Adversarial Observatory</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <title>Observe — See the shape of the noise | FIND THE AI</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
+<body class="bg-black text-white selection:bg-white selection:text-black">
 
-  <!-- Navigation Bar -->
-  <header class="navbar">
-    <div class="nav-container">
-      <div class="brand">
-        <div class="brand-icon">
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="9"/>
-            <path d="M12 3v18M3 12h18"/>
-            <circle cx="12" cy="12" r="4"/>
-          </svg>
-        </div>
-        <div class="brand-text">
-          <span class="brand-title">FIND THE AI</span>
-          <span class="brand-badge">FORENSIC OBSERVATORY v2.3</span>
+  <!-- Background Video playing at 0.5x speed -->
+  <video id="hero-video" class="hero-video" muted autoplay loop playsinline preload="auto"></video>
+
+  <!-- Navbar -->
+  <nav class="nav-wrapper">
+    <div class="liquid-glass nav-pill">
+      <div class="brand-group">
+        <!-- Observe Logo SVG -->
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="w-6 h-6 text-white">
+          <path d="M4.21 16.5 A9 9 0 0 1 16.5 4.21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path d="M16.5 4.21 A9 9 0 0 1 19.79 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-dasharray="2.4 2.3"/>
+          <path d="M19.79 16.5 A9 9 0 0 1 4.21 16.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="0.01 4.7"/>
+          <circle cx="12" cy="12" r="2.5" fill="currentColor"/>
+        </svg>
+        <span class="font-semibold text-lg tracking-tight">Observe <span class="text-xs font-normal text-white/60 ml-1">AI Forensics</span></span>
+
+        <div class="nav-links">
+          <a href="#hero" class="nav-link">Scanner</a>
+          <a href="#workbench" class="nav-link">Workbench</a>
+          <a href="#nodes" class="nav-link">5-Node System</a>
+          <a href="#benchmark" class="nav-link">RAID Benchmark</a>
         </div>
       </div>
 
-      <nav class="nav-links">
-        <a href="#simulator" class="nav-link active">Forensic Scanner</a>
-        <a href="#modules" class="nav-link">5-Node Architecture</a>
-        <a href="#attack-lab" class="nav-link">Adversarial Lab</a>
-        <a href="#benchmark" class="nav-link">RAID Benchmark</a>
-        <a href="#backend-docs" class="nav-link">Python Backend</a>
-      </nav>
-
-      <div class="nav-actions">
-        <div class="backend-status-container">
-          <span id="backendStatusBadge" class="backend-badge fallback">Checking Backend...</span>
-        </div>
-        <a href="https://github.com/YashDhirajOza/FIND-THE-AI-" target="_blank" class="github-btn" rel="noreferrer">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
-            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
-          </svg>
-          <span>GitHub</span>
+      <div class="flex items-center gap-3">
+        <span id="backendStatusBadge" class="backend-badge fallback">Simulation Mode</span>
+        <a href="https://github.com/YashDhirajOza/FIND-THE-AI-" target="_blank" class="solid-white-btn text-xs py-1.5 px-4">
+          GitHub Repo
         </a>
       </div>
     </div>
-  </header>
+  </nav>
 
-  <!-- Hero Section with Interactive 3D Canvas -->
-  <section class="hero-section">
-    <!-- 3D Interactive WebGL/Canvas Layer -->
-    <div class="hero-3d-wrapper">
-      <canvas id="hero3dCanvas" class="hero-3d-canvas"></canvas>
-      <div class="canvas-overlay-vignette"></div>
-      
-      <!-- 3D Scene Controls -->
-      <div class="scene-controls">
-        <span class="scene-ctrl-label">3D Forensic Engine:</span>
-        <button class="scene-btn active" data-scene-mode="curvature">Probability Landscape</button>
-        <button class="scene-btn" data-scene-mode="lattice">Neural Lattice</button>
-        <button class="scene-btn" data-scene-mode="polyhedron">Forensic Geometry</button>
-      </div>
+  <!-- HERO FULL-VIEWPORT SCREEN -->
+  <section id="hero" class="hero-container">
+    <!-- Headline with layered dark auras -->
+    <h1 class="hero-headline font-serif-instrument">
+      See the shape of the <em class="italic">noise</em>
+    </h1>
+
+    <!-- Subline: single line on desktop with subtle aura -->
+    <p class="hero-subline">
+      Every probability curve from generative models — rendered as one picture you can actually read.
+    </p>
+
+    <!-- Quick Scan Input Pill -->
+    <div class="hero-input-pill liquid-glass">
+      <input type="text" id="quickInput" placeholder="Paste or type text to inspect synthetic probability..." class="hero-input" />
+      <button id="quickAnalyzeBtn" class="solid-white-btn">
+        Analyze Text
+      </button>
     </div>
 
-    <div class="hero-content">
-      <div class="hero-pill">
-        <span class="pulse-indicator"></span>
-        <span id="backendModeText">Empirical Multi-Engine Text Forensics</span>
-      </div>
-      <h1 class="hero-headline">
-        Empirical Evidence for <br/>
-        Synthetic Text Forensics
-      </h1>
-      <p class="hero-description">
-        Language models leave probabilistic and structural artifacts in text. FIND THE AI evaluates content across 
-        probability curvature, disentangled attention representations, information density variance, and adversarial stress-testing.
-      </p>
+    <!-- Quick Benchmark Preset Pills -->
+    <div class="preset-pills-row">
+      <span class="text-xs text-white/50 mr-2">Corpus Presets:</span>
+      <button class="liquid-glass preset-pill active" data-preset="chatgpt">ChatGPT Direct</button>
+      <button class="liquid-glass preset-pill" data-preset="human">Human Narrative</button>
+      <button class="liquid-glass preset-pill" data-preset="academic">Academic Paper</button>
+      <button class="liquid-glass preset-pill" data-preset="humanized">Paraphrased AI</button>
+      <button class="liquid-glass preset-pill" data-preset="short">Short Sample (&lt;50w)</button>
+    </div>
 
-      <div class="hero-stats-grid">
-        <div class="stat-card" data-tilt>
-          <span class="stat-number">5 Nodes</span>
-          <span class="stat-label">Ensemble Architecture</span>
-        </div>
-        <div class="stat-card" data-tilt>
-          <span class="stat-number">0.941</span>
-          <span class="stat-label">RAID Benchmark AUROC</span>
-        </div>
-        <div class="stat-card" data-tilt>
-          <span class="stat-number">2.1%</span>
-          <span class="stat-label">Observed FPR (Human Corpus)</span>
-        </div>
-        <div class="stat-card" data-tilt>
-          <span class="stat-number">Active</span>
-          <span class="stat-label">Abstention Safeguard Gate</span>
-        </div>
-      </div>
+    <!-- Social & Action Circles -->
+    <div class="social-row">
+      <a href="https://github.com/YashDhirajOza/FIND-THE-AI-" target="_blank" class="liquid-glass-circle circle-btn" title="GitHub Repository">
+        <iconify-icon icon="lucide:github" class="text-xl"></iconify-icon>
+      </a>
+      <a href="#workbench" class="liquid-glass-circle circle-btn" title="Open Forensic Workbench">
+        <iconify-icon icon="lucide:sliders" class="text-xl"></iconify-icon>
+      </a>
+      <button id="quickDossierBtn" class="liquid-glass-circle circle-btn" title="Export Forensic Dossier">
+        <iconify-icon icon="lucide:file-text" class="text-xl"></iconify-icon>
+      </button>
     </div>
   </section>
 
-  <!-- SECTION 1: FORENSIC SCANNER -->
-  <section id="simulator" class="section-container">
-    <div class="section-header">
-      <div class="section-tag">MULTI-LENS SCANNER</div>
-      <h2 class="section-title">Forensic Analysis Laboratory</h2>
-      <p class="section-subtitle">
-        Evaluate suspect text across four independent mathematical signals with dynamic confidence intervals, inter-engine consensus scoring, and sentence-level heatmaps.
-      </p>
+  <!-- FORENSIC WORKBENCH SECTION -->
+  <section id="workbench" class="workbench-section">
+    <div class="section-title-wrap">
+      <h2 class="section-headline font-serif-instrument">Forensic Workbench</h2>
+      <p class="section-subtext">Multi-signal probabilistic curvature and disentangled attention diagnostics.</p>
     </div>
 
-    <!-- Presets Bar -->
-    <div class="presets-container">
-      <span class="presets-label">Load Test Benchmark:</span>
-      <div class="preset-buttons">
-        <button class="preset-btn active" data-preset="chatgpt">ChatGPT Output (Direct)</button>
-        <button class="preset-btn" data-preset="human">Human Narrative (Organic)</button>
-        <button class="preset-btn" data-preset="academic">Academic Paper Excerpt</button>
-        <button class="preset-btn" data-preset="humanized">Paraphrased AI (Stealth)</button>
-        <button class="preset-btn" data-preset="hybrid">Hybrid Co-Authored</button>
-        <button class="preset-btn" data-preset="short">Short Sample (&lt; 50 Words / Abstain)</button>
-      </div>
-    </div>
-
-    <!-- Simulator Core Grid -->
-    <div class="simulator-grid">
+    <div class="scanner-grid">
       <!-- Input Panel -->
-      <div class="sim-panel input-panel" data-tilt>
-        <div class="panel-header">
-          <div class="panel-title">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-            <span>Target Text Buffer</span>
-          </div>
-          <div class="text-stats">
-            <span id="wordCount">0 words</span> • <span id="charCount">0 chars</span>
-          </div>
+      <div class="liquid-glass scanner-panel">
+        <div class="panel-head">
+          <span>Suspect Text Buffer</span>
+          <span id="wordCount" class="text-white/60 font-mono text-xs">0 words</span>
         </div>
-
-        <textarea id="textInput" class="sim-textarea" placeholder="Paste or type text to inspect for AI probability signatures..."></textarea>
-
-        <div class="panel-footer">
-          <button id="clearBtn" class="secondary-btn">Clear Buffer</button>
-          <button id="analyzeBtn" class="primary-btn">
-            <span>Execute 5-Node Forensic Scan</span>
-          </button>
+        <textarea id="textInput" class="scanner-textarea" placeholder="Paste full article, essay, or paragraph here..."></textarea>
+        <div class="scanner-footer">
+          <button id="clearBtn" class="liquid-glass preset-pill">Clear</button>
+          <button id="analyzeBtn" class="solid-white-btn text-xs py-2 px-5">Execute 5-Node Scan</button>
         </div>
       </div>
 
-      <!-- Results Summary Panel -->
-      <div class="sim-panel results-panel" data-tilt>
-        <div class="panel-header">
-          <div class="panel-title">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-            <span>Diagnostic Diagnosis & Provenance</span>
-          </div>
-          <span class="status-badge" id="confidenceBadge">Calibrated High</span>
+      <!-- Verdict & Meters Panel -->
+      <div class="liquid-glass scanner-panel">
+        <div class="panel-head">
+          <span>Diagnostic Verdict</span>
+          <span id="confidenceBadge" class="backend-badge">High Confidence</span>
         </div>
 
-        <!-- Radial Gauge & Score -->
-        <div class="verdict-summary">
-          <div class="gauge-container">
-            <svg class="gauge-svg" viewBox="0 0 160 160">
-              <circle class="gauge-bg" cx="80" cy="80" r="68"></circle>
-              <circle class="gauge-fill" id="gaugeCircle" cx="80" cy="80" r="68"></circle>
-            </svg>
-            <div class="gauge-center">
-              <span class="gauge-value" id="scoreValue">--</span>
-              <span class="gauge-label">AI LIKELIHOOD</span>
-            </div>
-          </div>
-
-          <div class="verdict-meta">
-            <h3 class="verdict-title" id="verdictText">Evaluating Evidence...</h3>
-            <div class="margin-pill" id="marginBadge">Margin: ±5% (High Confidence)</div>
-            <p class="verdict-desc" id="verdictExplanation">
-              Evaluating probability curvature, cross-perplexity ratios, and disentangled syntactic attention matrices.
-            </p>
-            <div class="provenance-row">
-              <span>Case ID: <strong id="caseIdText">FT-AI-INIT</strong></span> • 
-              <span>SHA-256: <code id="textHashText">e3b0c44298fc1c14...</code></span>
-            </div>
+        <div class="verdict-box">
+          <svg class="gauge-svg" viewBox="0 0 160 160">
+            <circle class="gauge-bg" cx="80" cy="80" r="68"></circle>
+            <circle class="gauge-fill" id="gaugeCircle" cx="80" cy="80" r="68"></circle>
+          </svg>
+          <div class="verdict-info">
+            <h3 id="verdictText">Analyzing Evidence...</h3>
+            <span id="marginBadge" class="text-xs text-white/60 font-mono block mb-1">Margin: ±5%</span>
+            <p id="verdictExplanation">Evaluating probability curvature and burstiness.</p>
           </div>
         </div>
 
-        <!-- Consensus & Disagreement Monitor -->
-        <div class="consensus-box">
-          <div class="consensus-header">
-            <span class="c-title">Inter-Engine Consensus Agreement</span>
-            <span class="c-val" id="agreementVal">--% Agreement</span>
-          </div>
-          <div class="meter-bar"><div class="meter-fill" id="agreementBar" style="background: var(--accent-blue)"></div></div>
-          <div id="consensusAlert" class="consensus-alert" style="display: none;"></div>
-        </div>
-
-        <!-- 4-Engine Live Breakdown Grid -->
-        <div class="engine-live-grid">
-          <div class="engine-mini-card">
-            <div class="mini-top">
+        <div class="engine-meters-grid">
+          <div class="meter-card">
+            <div class="meter-top">
               <span>Neural Attention</span>
-              <strong id="scoreAurelia">--%</strong>
+              <span id="scoreAurelia" class="font-mono">--%</span>
             </div>
-            <div class="meter-bar"><div class="meter-fill" id="barAurelia"></div></div>
+            <div class="bar-track"><div id="barAurelia" class="bar-fill"></div></div>
           </div>
-          <div class="engine-mini-card">
-            <div class="mini-top">
-              <span>Curvature & Binoculars</span>
-              <strong id="scoreAlexei">--%</strong>
+          <div class="meter-card">
+            <div class="meter-top">
+              <span>Likelihood Curvature</span>
+              <span id="scoreAlexei" class="font-mono">--%</span>
             </div>
-            <div class="meter-bar"><div class="meter-fill" id="barAlexei"></div></div>
+            <div class="bar-track"><div id="barAlexei" class="bar-fill"></div></div>
           </div>
-          <div class="engine-mini-card">
-            <div class="mini-top">
-              <span>Stylometrics & Burstiness</span>
-              <strong id="scoreSiobhan">--%</strong>
+          <div class="meter-card">
+            <div class="meter-top">
+              <span>Stylometrics (σ/μ)</span>
+              <span id="scoreSiobhan" class="font-mono">--%</span>
             </div>
-            <div class="meter-bar"><div class="meter-fill" id="barSiobhan"></div></div>
+            <div class="bar-track"><div id="barSiobhan" class="bar-fill"></div></div>
           </div>
-          <div class="engine-mini-card">
-            <div class="mini-top">
-              <span>Adversarial Resistance</span>
-              <strong id="scoreMarcus">--%</strong>
+          <div class="meter-card">
+            <div class="meter-top">
+              <span>Adversarial Defense</span>
+              <span id="scoreMarcus" class="font-mono">--%</span>
             </div>
-            <div class="meter-bar"><div class="meter-fill" id="barMarcus"></div></div>
+            <div class="bar-track"><div id="barMarcus" class="bar-fill"></div></div>
           </div>
         </div>
 
-        <!-- Mathematical Metrics Grid -->
-        <div class="metrics-grid">
-          <div class="metric-item">
-            <div class="metric-top">
-              <span class="m-title">Perplexity Estimate</span>
-              <span class="m-val" id="valPerplexity">--</span>
-            </div>
-            <div class="meter-bar"><div class="meter-fill" id="barPerplexity"></div></div>
-            <span class="m-hint">Lower = High Token Predictability</span>
-          </div>
-
-          <div class="metric-item">
-            <div class="metric-top">
-              <span class="m-title">Burstiness Index (σ/μ)</span>
-              <span class="m-val" id="valBurstiness">--</span>
-            </div>
-            <div class="meter-bar"><div class="meter-fill" id="barBurstiness"></div></div>
-            <span class="m-hint">Sentence Length Variance</span>
-          </div>
-
-          <div class="metric-item">
-            <div class="metric-top">
-              <span class="m-title">Lexical Diversity (TTR)</span>
-              <span class="m-val" id="valTTR">--</span>
-            </div>
-            <div class="meter-bar"><div class="meter-fill" id="barTTR"></div></div>
-            <span class="m-hint">Type-Token Ratio</span>
-          </div>
-
-          <div class="metric-item">
-            <div class="metric-top">
-              <span class="m-title">Top-10 Token Saturation</span>
-              <span class="m-val" id="valTop10">--</span>
-            </div>
-            <div class="meter-bar"><div class="meter-fill" id="barTop10"></div></div>
-            <span class="m-hint">GLTR Green Probability Tier</span>
-          </div>
+        <div class="text-xs text-white/50 font-mono">
+          Case ID: <span id="caseIdText" class="text-white">FT-AI-INIT</span> • SHA-256: <span id="textHashText" class="text-white">e3b0c442...</span>
         </div>
       </div>
     </div>
 
-    <!-- Forensic Visualizer Views -->
-    <div class="visualizer-tabs-container">
+    <!-- Visualizers: Heatmap & GLTR -->
+    <div class="liquid-glass visualizer-card">
       <div class="view-tabs">
-        <button class="view-tab active" data-view="heatmap">
-          <span>Sentence Heatmap</span>
-        </button>
-        <button class="view-tab" data-view="gltr">
-          <span>GLTR Token Ranks</span>
-        </button>
-        <button class="view-tab" data-view="report">
-          <span>Forensic Audit Dossier</span>
-        </button>
+        <button class="view-tab active" data-view="heatmap">Sentence Heatmap</button>
+        <button class="view-tab" data-view="gltr">GLTR Token Ranks</button>
+        <button class="view-tab" data-view="report">Audit Dossier</button>
       </div>
 
-      <!-- VIEW 1: Sentence Heatmap -->
-      <div class="view-content active" id="view-heatmap">
-        <div class="heatmap-legend">
-          <span class="legend-item"><span class="legend-dot dot-human"></span> Organic Human (&lt; 35%)</span>
-          <span class="legend-item"><span class="legend-dot dot-mixed"></span> Mixed / Edited (35% - 65%)</span>
-          <span class="legend-item"><span class="legend-dot dot-ai"></span> High Synthetic Evidence (&gt; 65%)</span>
-          <span class="legend-note">Click any sentence below to inspect its individual mathematical diagnosis.</span>
-        </div>
-
-        <div class="heatmap-render-box" id="heatmapContainer">
-          <!-- Sentences injected dynamically -->
-        </div>
-
-        <!-- Sentence Inspector Drawer -->
-        <div class="sentence-inspector" id="sentenceInspector">
-          <div class="inspector-header">
-            <h4>Sentence Forensics Drilldown</h4>
-            <button id="closeInspector" class="close-btn">&times;</button>
-          </div>
-          <p class="inspected-text" id="inspectedSentenceText">"..."</p>
-          <div class="inspector-stats" id="inspectedSentenceStats"></div>
+      <!-- VIEW 1: Heatmap -->
+      <div id="view-heatmap" class="view-content active">
+        <div class="heatmap-box" id="heatmapContainer">
+          <!-- Injected dynamically -->
         </div>
       </div>
 
-      <!-- VIEW 2: GLTR Token Ranks -->
-      <div class="view-content" id="view-gltr">
-        <div class="gltr-legend">
-          <span class="gltr-badge g-top10">Top 10 Most Likely Token (Green)</span>
-          <span class="gltr-badge g-top100">Top 100 Token (Yellow)</span>
-          <span class="gltr-badge g-top1000">Top 1000 Token (Red)</span>
-          <span class="gltr-badge g-out">Out of Top 1000 / Creative (Purple)</span>
-        </div>
-        <p class="gltr-explanation">
-          <strong>Sampling Note:</strong> Large Language Models predominantly favor Top-10 predictable tokens at default temperatures. However, decoding sampling (temperature, top-p, top-k) introduces lower-ranked tokens. GLTR is an explainability visualizer, not a standalone classification rule.
-        </p>
-        <div class="gltr-render-box" id="gltrContainer"></div>
+      <!-- VIEW 2: GLTR -->
+      <div id="view-gltr" class="view-content">
+        <p class="text-xs text-white/60 mb-3">Green: Top 10 tokens • Yellow: Top 100 • Red: Top 1000 • Purple: Out of top 1000</p>
+        <div class="heatmap-box" id="gltrContainer"></div>
       </div>
 
-      <!-- VIEW 3: Audit Dossier Export -->
-      <div class="view-content" id="view-report">
-        <div class="report-box">
-          <div class="report-actions">
-            <button id="copyReportBtn" class="secondary-btn">Copy Dossier</button>
-            <button id="downloadJsonBtn" class="secondary-btn">Download JSON (SHA-256)</button>
-          </div>
-          <pre class="report-pre" id="reportPre">Generating audit dossier...</pre>
+      <!-- VIEW 3: Audit Dossier -->
+      <div id="view-report" class="view-content">
+        <div class="flex gap-2 mb-3">
+          <button id="copyReportBtn" class="solid-white-btn text-xs py-1.5 px-4">Copy Markdown</button>
+          <button id="downloadJsonBtn" class="liquid-glass preset-pill">Download JSON</button>
         </div>
+        <pre id="reportPre" class="font-mono text-xs text-white/70 overflow-x-auto p-4 bg-black/40 rounded-lg">Generating dossier...</pre>
       </div>
     </div>
   </section>
 
-  <!-- SECTION 2: ADVERSARIAL STRESS-TEST LAB -->
-  <section id="attack-lab" class="section-container">
-    <div class="section-header">
-      <div class="section-tag">ADVERSARIAL EVALUATION</div>
-      <h2 class="section-title">Adversarial Robustness Stress-Test</h2>
-      <p class="section-subtitle">
-        Evaluate detector degradation under real-world perturbation attacks including synonym replacement, punctuation jitter, and human-AI co-authoring.
-      </p>
+  <!-- 5-NODE METHODOLOGY GRID -->
+  <section id="nodes" class="workbench-section">
+    <div class="section-title-wrap">
+      <h2 class="section-headline font-serif-instrument">The 5-Node Forensic System</h2>
+      <p class="section-subtext">Multi-lens modeling of semantic structure, curvature, and entropy.</p>
     </div>
 
-    <div class="attack-card" data-tilt>
-      <div class="attack-controls">
-        <div>
-          <h3>Automated Perturbation Suite</h3>
-          <p>Simulates QuillBot synonym substitution, StealthWriter clause fragmentation, and 50% co-authoring.</p>
-        </div>
-        <button id="runAttackBtn" class="primary-btn">
-          <span>Execute Adversarial Attack Suite</span>
-        </button>
+    <div class="nodes-grid">
+      <div class="liquid-glass node-card">
+        <span class="node-num">NODE 01</span>
+        <h4>Neural Attention</h4>
+        <p>Decoupled positional & content embeddings to spot synthetic transitions across synonym swaps.</p>
       </div>
-
-      <div id="attackResults" class="attack-results">
-        <div class="attack-placeholder">
-          Click "Execute Adversarial Attack Suite" to test the current text buffer against 4 live perturbation pipelines.
-        </div>
+      <div class="liquid-glass node-card">
+        <span class="node-num">NODE 02</span>
+        <h4>Likelihood Curvature</h4>
+        <p>Binoculars observer-performer log ratio testing energy drops on local likelihood peaks.</p>
       </div>
-    </div>
-  </section>
-
-  <!-- SECTION 3: THE 5 METHODOLOGY NODES -->
-  <section id="modules" class="section-container">
-    <div class="section-header">
-      <div class="section-tag">METHODOLOGY</div>
-      <h2 class="section-title">The 5 Computational Detection Nodes</h2>
-      <p class="section-subtitle">
-        How our multi-lens ensemble models semantic structure, probability curvature, and linguistic entropy.
-      </p>
-    </div>
-
-    <div class="council-wrapper">
-      <!-- Member Selector Tabs -->
-      <div class="council-tabs" id="moduleTabs">
-        <button class="module-tab active" data-module-key="neural" data-tilt>
-          <div class="tab-meta">
-            <span class="name">Disentangled Attention</span>
-            <span class="role">Neural Semantic Classifier</span>
-          </div>
-        </button>
-        <button class="module-tab" data-module-key="curvature" data-tilt>
-          <div class="tab-meta">
-            <span class="name">Likelihood Curvature</span>
-            <span class="role">Zero-Shot Binoculars Ratio</span>
-          </div>
-        </button>
-        <button class="module-tab" data-module-key="stylometry" data-tilt>
-          <div class="tab-meta">
-            <span class="name">Information Density</span>
-            <span class="role">Stylometrics & Burstiness (σ/μ)</span>
-          </div>
-        </button>
-        <button class="module-tab" data-module-key="adversarial" data-tilt>
-          <div class="tab-meta">
-            <span class="name">Adversarial Resistance</span>
-            <span class="role">Paraphrase Invariance</span>
-          </div>
-        </button>
-        <button class="module-tab" data-module-key="safeguard" data-tilt>
-          <div class="tab-meta">
-            <span class="name">Elena Safeguard Protocol</span>
-            <span class="role">Uncertainty & Abstention Gate</span>
-          </div>
-        </button>
+      <div class="liquid-glass node-card">
+        <span class="node-num">NODE 03</span>
+        <h4>Information Density</h4>
+        <p>Sentence length variance coefficient (σ/μ) and Type-Token Ratio identifying uniform rhythm.</p>
       </div>
-
-      <!-- Module Focus Card -->
-      <div class="council-card" id="moduleCard" data-tilt>
-        <div class="card-header">
-          <div>
-            <span class="node-badge" id="moduleCode">NODE-01 // NEURAL</span>
-            <h3 class="member-name" id="moduleName">Disentangled Attention Classifier</h3>
-          </div>
-          <div class="member-specialty-badge">DeBERTa-v3 Architecture</div>
-        </div>
-
-        <div class="card-quote" id="moduleDescription">
-          Evaluates sentence-to-sentence semantic transitions using contextual embeddings to detect synthetic structural patterns that persist across vocabulary swaps.
-        </div>
-
-        <div class="card-details-grid">
-          <div class="detail-box">
-            <span class="detail-label">Computational Lens</span>
-            <span class="detail-value" id="moduleFocus">Contextual semantic continuity & positional dissonance</span>
-          </div>
-          <div class="detail-box">
-            <span class="detail-label">Mitigated Vulnerability</span>
-            <span class="detail-value">Superficial synonym substitution (QuillBot)</span>
-          </div>
-          <div class="detail-box">
-            <span class="detail-label">Ensemble Weight</span>
-            <span class="detail-value">30% Calibrated Primary Signal</span>
-          </div>
-        </div>
+      <div class="liquid-glass node-card">
+        <span class="node-num">NODE 04</span>
+        <h4>Adversarial Resistance</h4>
+        <p>Quantifies resilience against QuillBot synonym replacement and StealthWriter clause jitter.</p>
+      </div>
+      <div class="liquid-glass node-card">
+        <span class="node-num">NODE 05</span>
+        <h4>Elena Safeguard Gate</h4>
+        <p>Enforces 50-word sample minimums and triggers explicit Abstention on uncertain inputs.</p>
+      </div>
+      <div class="liquid-glass node-card">
+        <span class="node-num">BACKEND</span>
+        <h4>FastAPI & PyTorch</h4>
+        <p>Run 100% offline with GPU acceleration via <code>uvicorn backend.server:app --port 8000</code>.</p>
       </div>
     </div>
   </section>
 
-  <!-- SECTION 4: EMPIRICAL BENCHMARK -->
-  <section id="benchmark" class="section-container">
-    <div class="section-header">
-      <div class="section-tag">EMPIRICAL VALIDATION</div>
-      <h2 class="section-title">Cross-Model & Adversarial Benchmark</h2>
-      <p class="section-subtitle">
-        Empirical evaluation results evaluated across 10,000 samples drawn from the RAID (~6M generations) and HC3 benchmark datasets.
-      </p>
+  <!-- BENCHMARK TABLE -->
+  <section id="benchmark" class="workbench-section">
+    <div class="section-title-wrap">
+      <h2 class="section-headline font-serif-instrument">RAID Benchmark Evaluation</h2>
+      <p class="section-subtext">Evaluated across 10,000 samples from the RAID benchmark (~6M generations).</p>
     </div>
 
-    <div class="benchmark-table-container" data-tilt>
+    <div class="liquid-glass benchmark-table-box">
       <table class="benchmark-table">
         <thead>
           <tr>
-            <th>Evaluated Generator / Attack</th>
-            <th>Sample Count (N)</th>
+            <th>Corpus / Generator</th>
+            <th>Sample (N)</th>
             <th>Accuracy</th>
-            <th>FPR (False Positive)</th>
-            <th>FNR (False Negative)</th>
+            <th>FPR</th>
             <th>AUROC</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td><strong>Human Baseline (Organic Corpus)</strong></td>
+            <td><strong>Human Baseline (Organic)</strong></td>
             <td>2,500</td>
             <td>97.9%</td>
-            <td><code class="stat-good">2.1%</code></td>
-            <td>—</td>
-            <td>0.982</td>
+            <td class="text-emerald-400 font-mono">2.1%</td>
+            <td class="font-mono">0.982</td>
           </tr>
           <tr>
             <td><strong>GPT-4o (Direct Generation)</strong></td>
             <td>1,500</td>
             <td>96.4%</td>
-            <td>—</td>
-            <td><code class="stat-good">3.6%</code></td>
-            <td>0.978</td>
+            <td class="text-white/60 font-mono">3.6% (FNR)</td>
+            <td class="font-mono">0.978</td>
           </tr>
           <tr>
             <td><strong>Claude 3.5 Sonnet</strong></td>
             <td>1,500</td>
             <td>94.8%</td>
-            <td>—</td>
-            <td><code class="stat-good">5.2%</code></td>
-            <td>0.965</td>
+            <td class="text-white/60 font-mono">5.2% (FNR)</td>
+            <td class="font-mono">0.965</td>
           </tr>
           <tr>
             <td><strong>Gemini 1.5 Pro</strong></td>
             <td>1,500</td>
             <td>93.9%</td>
-            <td>—</td>
-            <td><code class="stat-warn">6.1%</code></td>
-            <td>0.954</td>
+            <td class="text-white/60 font-mono">6.1% (FNR)</td>
+            <td class="font-mono">0.954</td>
           </tr>
           <tr>
-            <td><strong>Llama-3-70B & Qwen-2.5</strong></td>
-            <td>1,500</td>
-            <td>95.2%</td>
-            <td>—</td>
-            <td><code class="stat-good">4.8%</code></td>
-            <td>0.961</td>
-          </tr>
-          <tr class="highlight-row">
-            <td><strong>Adversarial Paraphrasing (QuillBot / StealthWriter)</strong></td>
+            <td><strong>Adversarial Paraphrasing</strong></td>
             <td>1,500</td>
             <td>84.6%</td>
-            <td>3.4%</td>
-            <td><code class="stat-warn">15.4%</code></td>
-            <td>0.892</td>
+            <td class="text-amber-400 font-mono">15.4% (FNR)</td>
+            <td class="font-mono">0.892</td>
           </tr>
         </tbody>
       </table>
     </div>
   </section>
 
-  <!-- SECTION 5: PYTHON BACKEND BLUEPRINT -->
-  <section id="backend-docs" class="section-container">
-    <div class="section-header">
-      <div class="section-tag">LOCAL INFERENCE ENGINE</div>
-      <h2 class="section-title">FastAPI & PyTorch Backend</h2>
-      <p class="section-subtitle">
-        Run the genuine 5-node PyTorch inference backend locally on your machine with full GPU acceleration.
-      </p>
-    </div>
-
-    <div class="code-preview-card" data-tilt>
-      <div class="code-header">
-        <div class="file-tab active">
-          <span>backend/server.py (FastAPI REST Server)</span>
-        </div>
-      </div>
-      <pre class="code-block"><code><span class="comment"># 1. Install dependencies</span>
-pip install -r backend/requirements.txt
-
-<span class="comment"># 2. Run local FastAPI inference server</span>
-uvicorn backend.server:app --host 127.0.0.1 --port 8000 --reload
-
-<span class="comment"># 3. Analyze text via REST API</span>
-curl -X POST http://127.0.0.1:8000/api/analyze \
-  -H "Content-Type: application/json" \
-  -d '{"text": "Artificial intelligence is transforming the modern technological landscape..."}'</code></pre>
-    </div>
-  </section>
-
   <!-- Footer -->
   <footer class="footer">
-    <div class="footer-container">
-      <div class="footer-brand">
-        <span class="brand-title">FIND THE AI</span>
-        <p>An open research and interactive forensics observatory created by <strong>Yash Dhiraj Oza</strong>.</p>
-      </div>
-
-      <div class="footer-links">
-        <a href="https://github.com/YashDhirajOza/FIND-THE-AI-" target="_blank" rel="noreferrer">GitHub Repository</a>
-        <a href="#simulator">Scanner</a>
-        <a href="#attack-lab">Adversarial Lab</a>
-        <a href="#benchmark">RAID Benchmark</a>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>© 2026 FIND THE AI Project • Built for empirical rigor, adversarial transparency, and ethical abstention safeguards.</p>
-    </div>
+    <p>Observe Design System • FIND THE AI Project • Built for empirical rigor and calm forensic clarity.</p>
   </footer>
+
+  <!-- Background Video Script: 0.5x playback rate -->
+  <script>
+    const video = document.getElementById('hero-video');
+    video.src = "https://designerstephen.github.io/public-assets/videos/observe-hero.mp4";
+    video.playbackRate = 0.5;
+  </script>
 
   <script src="app.js"></script>
 </body>
